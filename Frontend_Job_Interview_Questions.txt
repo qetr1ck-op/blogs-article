@@ -1,0 +1,114 @@
+HTML Question
+
+What a <code>doctype</code> do?
+We have definition DTD (Document Type Definition).
+Why specify a DTD? Because it defines how actually Browser will parse HTML and render page. Not including a DOCTYPE or including an incorrect DOCTYPE can trigger quirks mode. The problem is that quirks mode in Internet Explorer is quite different from quirks mode in Firefox (and other browsers), meaning that you'll have a much harder job to ensure your page works consistently in all browsers.
+
+Difference between Quirks and Standard Mode?
+In the old days of the web, pages were typically written in two versions: One for Netscape Navigator, and one for Microsoft Internet Explorer. When the web standards were made at W3C, browsers could not just start using them, as doing so would break most existing sites on the web. Browsers therefore introduced two modes to treat new standards compliant sites differently from old legacy sites.
+There are now three modes used by the layout engines in web browsers: quirks mode, almost standards mode, and full standards mode. In quirks mode, layout emulates nonstandard behavior in Navigator 4 and Internet Explorer 5 for Windows that is required not to break existing content on the Web. In full standards mode, the behavior is (hopefully) the behavior described by the HTML and CSS specifications. In almost standards mode, there are only a very small number of quirks implemented.
+
+What are <code>data-*</code> attribute for?
+We can use this stored data wit JavaScript tp create a richer user experience. Imagine when user click on navigation section browser can immediately show additional data witch stored in <code>data</code> attribute. We don't even need to use Ajax calls.
+
+[html]
+<div id="foo" data-secret-info="foo"></div>
+[/html]
+
+[javascript]
+console.log(document.getElementById('foo').dataSet.secretInfo) // foo
+//IE <= 9
+console.log(document.getElementById('foo').getAttribute('data-secret-info')) //foo
+console.log($('#foo').data('secretInfo')) //foo
+[/javascript]
+
+Describe the difference between cookies, sessionStorage and localStorage
+<ul>
+	<ol>HTML5 web storage = generic term for the new client-side data storage</ol>
+	<ul>
+		<li>Local Storage = persistent(lasts until you delete it or the user deletes) and scoped to domain. Local Storage is as big as 5MB per domain. It stores data with no expiration date, and gets cleared only through JavaScript, or clearing the Browser Cache / Locally Stored Data. At the moment usually mentioned:</ol></li>
+		<ul>
+			<li>'default' = stores data in name/value pairs</li>
+			<li>WEB SQL = aka Web Database</li>
+		</ul>
+		<li>Session storage = temporary (only be accessible while and by the window that created it is open), scoped to current window</li>
+		<li>Cookies = the old school way for doing all the above. Cookies give you a limit of 4096 bytes. Cookies have an expiry date. Stores data in key/value pairs per domain.</li>
+	</ul>
+	<ol>
+</ul>
+
+Can you explain the difference between GET and POST?
+Table of difference <a href="http://www.diffen.com/difference/GET_(HTTP)_vs_POST_(HTTP)">-></a>
+
+CSS Question
+
+What is different between classes and IDs in CSS?
+IDs are unique:
+<ul>
+	<li>Each element can have only one ID</li>
+	<li>Each page can have only one element with that ID</li>
+</ul>
+Classes are not unique:
+<ul>
+	<li>You can use the same class on multiple elements</li>
+	<li>You can use multiple classes on the same elements</li>
+</ul>
+Priority of CSS selectors:
+<ul>
+	<li>HTML selector, <code>div</code> - 1</li>
+	<li>classes, <code>.foo</code> - 10</li>
+	<li>IDs, <code>#bar</code> - 100</li>
+</ul>
+Every selector has its place in the specificity hierarchy. There are four distinct categories which define the specificity level of a given selector:
+<ol>
+	<li>Property !important has highest priority</li>
+	<li>Inline styles - 1000pts. It is attached directly to the element to be styled: <code><h1 style="color: #fff;"></code></li>
+	<li>IDs - 100pts. ID is an identifier for your page elements, such as <code>#div</code></li>
+	<li> Classes, attributes and pseudo-classes - 10pts.
+This group includes .classes, [attributes] and pseudo-classes such as :hover, :focus etc.</li>
+	<li>Elements and pseudo-elements - 1pts. Including for instance <code>:before</code> and <1code>:after</code></li>
+</ol>
+
+Describe what a "reset" and "normalize" CSS files do and how are they useful.
+The major difference is:
+<ul>
+	<li>CSS resets aim to remove all built-in browser styling. Standard elements like H1-6, p, strong, em - up looking exactly alike no having decoration at all. You are supposed to add all decoration itself</li>
+	<li>Normolize CSS aims to make styling consistent across all browsers. You're then supposed to add only the difference in your design needs.</li>
+</ul>
+Normilize CSS instead of CSS reset will make your CSS more smaller and faster to write.
+
+Describe floats (clearing techniques) and how they works?
+Float tutorial <a href="http://learn.javascript.ru/float">-></a>
+
+Describe <code>z-index</code> and how stacking context is formed.
+If you want to specify a different stacking order, you have to <code>position</code> an element and use <code>z-index</code> property.
+
+In the next example, the layers' stacking order is rearranged using <code>z-index</code>. The <code>z-index</code> of <code>DIV#5</code> has no effect since it is not a positioned element.
+
+<img src="https://developer.mozilla.org/@api/deki/files/912/=Understanding_zindex_03.png" alt="">
+
+A stacked content is formed anywhere in document by any element which is either:
+<ul>
+ <li>the root element (HTML),</li>
+ <li>positioned (absolutely or relatively) with a z-index value other than "auto",</li>
+ <li>a flex item with a z-index value other than "auto",</li>
+ <li>elements with an <a href="/en-US/docs/Web/CSS/opacity" title="The opacity CSS property specifies the transparency of an element, that is, the degree to which the background behind the element is overlaid."><code>opacity</code></a> value less than 1. (See <a class="external external-icon" href="http://www.w3.org/TR/css3-color/#transparency" title="http://www.w3.org/TR/css3-color/#transparency">the specification for opacity</a>),</li>
+ <li>elements with a <a href="/en-US/docs/Web/CSS/transform" title="The CSS transform property lets you modify the coordinate space of the CSS visual formatting model. Using it, elements can be translated, rotated, scaled, and skewed according to the values set."><code>transform</code></a> value other than "none",</li>
+ <li>on mobile WebKit and Chrome 22+, <code>position: fixed</code>&nbsp;always creates a new stacking context, even when z-index is "auto" (See <a class="external external-icon" href="http://updates.html5rocks.com/2012/09/Stacking-Changes-Coming-to-position-fixed-elements" title="http://updates.html5rocks.com/2012/09/Stacking-Changes-Coming-to-position-fixed-elements">this post</a>)</li>
+ <li>specifing any attribute above in <code>will-change</code>&nbsp;even you don't write themselves directly (See <a class="external external-icon" href="http://dev.opera.com/articles/css-will-change-property/">this post</a>)</li>
+</ul>
+
+Explain CSS sprites, and how would you implement on page?
+
+http://css-tricks.com/css-sprites/
+http://davidwalsh.name/css-sprites
+http://cssglobe.com/creating-easy-and-useful-css-sprites/
+
+What are your favorite image replacement techniques and which do you use when?
+http://css-tricks.com/css-image-replacement/
+
+CSS property hacks, conditionally included .css files, or... something else?
+http://www.paulirish.com/2008/conditional-stylesheets-vs-css-hacks-answer-neither/
+
+What are the different ways to visually hide content (and make it available only for screen readers)?
+http://www.sitepoint.com/when-and-how-to-visually-hide-content/
