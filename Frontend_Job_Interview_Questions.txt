@@ -1,6 +1,3 @@
-some new changes
-in new branch
-
 HTML Question
 
 What a <code>doctype</code> do?
