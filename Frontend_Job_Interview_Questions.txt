@@ -1,4 +1,4 @@
-HTML Question
+HTML Question test reset lst commit
 
 What a <code>doctype</code> do?
 We have definition DTD (Document Type Definition).
