@@ -1,4 +1,4 @@
-HTML Question fooz
+HTML Question
 
 What a <code>doctype</code> do?
 We have definition DTD (Document Type Definition).
