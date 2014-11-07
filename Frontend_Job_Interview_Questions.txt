@@ -103,6 +103,7 @@ Explain CSS sprites, and how would you implement on page?
 http://css-tricks.com/css-sprites/
 http://davidwalsh.name/css-sprites
 http://cssglobe.com/creating-easy-and-useful-css-sprites/
+http://spritepad.wearekiss.com/
 
 What are your favorite image replacement techniques and which do you use when?
 http://css-tricks.com/css-image-replacement/
