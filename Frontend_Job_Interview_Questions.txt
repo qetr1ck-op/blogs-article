@@ -95,7 +95,7 @@ A stacked content is formed anywhere in document by any element which is either:
  <li>elements with an <a href="/en-US/docs/Web/CSS/opacity" title="The opacity CSS property specifies the transparency of an element, that is, the degree to which the background behind the element is overlaid."><code>opacity</code></a> value less than 1. (See <a class="external external-icon" href="http://www.w3.org/TR/css3-color/#transparency" title="http://www.w3.org/TR/css3-color/#transparency">the specification for opacity</a>),</li>
  <li>elements with a <a href="/en-US/docs/Web/CSS/transform" title="The CSS transform property lets you modify the coordinate space of the CSS visual formatting model. Using it, elements can be translated, rotated, scaled, and skewed according to the values set."><code>transform</code></a> value other than "none",</li>
  <li>on mobile WebKit and Chrome 22+, <code>position: fixed</code>&nbsp;always creates a new stacking context, even when z-index is "auto" (See <a class="external external-icon" href="http://updates.html5rocks.com/2012/09/Stacking-Changes-Coming-to-position-fixed-elements" title="http://updates.html5rocks.com/2012/09/Stacking-Changes-Coming-to-position-fixed-elements">this post</a>)</li>
- <li>specifing any attribute above in <code>will-change</code>&nbsp;even you don't write themselves directly (See <a class="external external-icon" href="http://dev.opera.com/articles/css-will-change-property/">this post</a>)</li>
+ <li>specifying any attribute above in <code>will-change</code>&nbsp;even you don't write themselves directly (See <a class="external external-icon" href="http://dev.opera.com/articles/css-will-change-property/">this post</a>)</li>
 </ul>
 
 Explain CSS sprites, and how would you implement on page?
@@ -113,3 +113,9 @@ http://www.paulirish.com/2008/conditional-stylesheets-vs-css-hacks-answer-neithe
 
 What are the different ways to visually hide content (and make it available only for screen readers)?
 http://www.sitepoint.com/when-and-how-to-visually-hide-content/
+
+Have you ever used a grid system, and what do you prefer?
+http://css-tricks.com/dont-overthink-it-grids/
+
+Have you used or implemented media queries or mobile specific layouts/CSS?
+http://blog.teamtreehouse.com/modern-field-guide-responsive-web-design?utm_source=Treehouse+Pals+Newsletter&utm_medium=email&utm_campaign=24c69e637d-TH_BLOG_RSS_EMAIL_CAMPAIGN&utm_term=0_a9464578f3-24c69e637d-32861725
