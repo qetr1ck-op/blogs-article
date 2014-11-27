@@ -1,0 +1,130 @@
+!!Promises have been around for a while in the libraries, such as:
+<ol>
+    <li><a href="https://github.com/kriskowal/q">Q</a></li>
+    <li><a href="https://github.com/cujojs/when">when</a></li>
+    <li><a href="https://github.com/tildeio/rsvp.js">RSVP.js</a></li>
+</ol>
+The above and JavaScript promises share a common, standard behavior called <a href="https://github.com/promises-aplus/promises-spec">Promises/A+</a>. If you used jQeury, they have something similar implementation is called <a href="http://api.jquery.com/category/deferred-object/">Deferred on off cite</a> and post on my cite <a href="http://savemyday.in/deferred-and-promise-in-jquery/">Deferred and promise in jQuery</a>.
+
+Javascript promises are similar to RSVP.js. Example how create a promise:
+
+[javascript]
+var promise = new Promise(funtion (resolve, reject) {
+    //start to doing something async, then...
+
+    if (/*evething allright*/) {
+        resolve('Stuff worked')
+    } else {
+        reject(Error('It"s broken'));
+    }
+})
+[/javascript]
+
+The Promises constructor takes callback with two parameters: <code>resolve</code> and <code>reject</code>. Idea is to do something, perhaps async, then call resolve if everything worked, otherwise call reject. Here how to use the promise:
+
+[javascript]
+promise.then(function (res) {
+    console.log(res); // 'Stuff worked'
+}, function (err) {
+    console.log(err); // Error: 'It"s broken', with stack trace
+})
+[/javascript]
+
+!!Browser support and polyfill
+
+You can check that in all modern browser promises have already implemented on <a href="http://caniuse.com/#feat=promises">caniuse</a>. <code>WebKit, Blink</code> and <code>Gecko</code> have a excellent support, however <code>Trident</code>engine I mean IE, doesn't have realization of promises.
+
+To add promises to browsers and Node.js check out <a href="https://github.com/jakearchibald/es6-promise#readme">the polyfill</a>
+
+!!Promisifying XMLHttpRequest
+
+The <code>XMLHttpRequest</code> is a prime candidate for update to use promises. Example with simple GET/POST request:
+
+[javascript]
+function sendRequest(params) {
+    //return new promise
+    return new Promise(function (resolve, reject) {
+        //create usual XHR object
+        var req = new XMLHttpRequest();
+        req.open(params.isPost ? 'POST' : 'GET', params.url);
+
+        req.onload = function() {
+            //this is called even with 404 etc
+            //so need to check the status
+            //and resolve with result of XHR response text
+            req.status === 200 ?
+                resolve(req.response)
+                : reject(req.statusText);
+        };
+
+        //handle Network error
+        req.onerror = function() {
+            reject(Error('Network Error'));
+        };
+
+        req.send(params.isPost ? params.data : null);
+    });
+}
+[/javascript]
+
+Now let's use it:
+
+[javascript]
+sendRequest({url: 'example.json'}).then(function(response) {
+    console.log('Success', response);
+}, function(error) {
+    console.error('Failed', error);
+})
+[/javascript]
+
+!!Promise chaining
+
+<code>"then"</code> isn't the end of the story, you can chain <code>then</code> together to transform result of callback or run additional async action after another:
+
+[javascript]
+var promise = new Promise(function(resolve, reject) {
+  resolve(1);
+});
+
+promise.then(function(val) {
+  console.log(val); // 1
+  return val + 2;
+}).then(function(val) {
+  console.log(val); // 3
+});
+[/javascript]
+
+And practical example on our <code>sendRequest</code> function:
+
+[javascript]
+sendRequest({url: 'example.json'}).then(function(response) {
+    return(JSON.parse(response));
+}).then(function(response) {
+    console.log('Serialized JSON', response);
+})
+[/javascript]
+
+Or shorthand of previous example:
+
+[javascript]
+sendRequest({url: 'example.json'}).then(JSON.parse)).then(function(response) {
+    console.log('Serialized JSON', response);
+})
+[/javascript]
+
+!!Error handling
+So <code>then</code> takes two arguments, one for success, one for failure(or fulfill and rejected in promise-speak). We can also use <code>catch</code> method:
+
+[javascript]
+sendRequest({url: 'example.json'}).then(function(response) {
+    console.log('Success', response);
+}).catch(function(error) {
+    console.err(error);
+});
+//it's sugar for
+sendRequest({url: 'example.json'}).then(function(response) {
+    console.log('Success', response);
+}).than(undefined, function(error) {
+    console.error('Failed', error);
+});
+[/javascript]
