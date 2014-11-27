@@ -1,4 +1,19 @@
-!!Promises have been around for a while in the libraries, such as:
+<div class="wp-center">
+<img src="../source/images/promise.png" alt="" width="500px"/>
+</div>
+
+<ul style="list-style: none;">
+    <li><a class="link-icon" href="/promises-in-javascript/#Promises libraries and native Javascript promise object"></a>Promises libraries and native Javascript promise object</li>
+    <li><a class="link-icon" href="/promises-in-javascript/#Browser support and polyfill"></a>Browser support and polyfill</li>
+    <li><a class="link-icon" href="/promises-in-javascript/#Promisifying XMLHttpRequest"></a>Promisifying XMLHttpRequest</li>
+    <li><a class="link-icon" href="/promises-in-javascript/#Promise chaining"></a>Promise chaining</li>
+    <li><a class="link-icon" href="/promises-in-javascript/#Error handling"></a>Error handling</li>
+</ul>
+
+<!--more-->
+
+<a href name="Promises libraries and native Javascript promise object"></a>
+Promises have been around for a while in the libraries, such as:
 <ol>
     <li><a href="https://github.com/kriskowal/q">Q</a></li>
     <li><a href="https://github.com/cujojs/when">when</a></li>
@@ -30,13 +45,19 @@ promise.then(function (res) {
 })
 [/javascript]
 
-!!Browser support and polyfill
+<a href name="Browser support and polyfill"></a>
+<div class="title-block">
+    <i class="attention"></i>Browser support and polyfill
+</div>
 
-You can check that in all modern browser promises have already implemented on <a href="http://caniuse.com/#feat=promises">caniuse</a>. <code>WebKit, Blink</code> and <code>Gecko</code> have a excellent support, however <code>Trident</code>engine I mean IE, doesn't have realization of promises.
+You can check that in all modern browser promises have already implemented on <a href="http://caniuse.com/#feat=promises">caniuse</a>. <code>WebKit, Blink</code> and <code>Gecko</code> have a excellent support, however <code>Trident</code> engine I mean IE, doesn't have realization of promises.
 
 To add promises to browsers and Node.js check out <a href="https://github.com/jakearchibald/es6-promise#readme">the polyfill</a>
 
-!!Promisifying XMLHttpRequest
+<a href name="Promisifying XMLHttpRequest"></a>
+<div class="title-block">
+    <i class="attention"></i>Promisifying XMLHttpRequest
+</div>
 
 The <code>XMLHttpRequest</code> is a prime candidate for update to use promises. Example with simple GET/POST request:
 
@@ -77,7 +98,12 @@ sendRequest({url: 'example.json'}).then(function(response) {
 })
 [/javascript]
 
-!!Promise chaining
+Now we can make HTTP requests without manually typing XMLHttpRequest, which is great, because the less I have to see the infuriating camel-casing of XMLHttpRequest, the happier my life will be.
+
+<a href name="Promise chaining"></a>
+<div class="title-block">
+    <i class="attention"></i>Promise chaining
+</div>
 
 <code>"then"</code> isn't the end of the story, you can chain <code>then</code> together to transform result of callback or run additional async action after another:
 
@@ -112,7 +138,12 @@ sendRequest({url: 'example.json'}).then(JSON.parse)).then(function(response) {
 })
 [/javascript]
 
-!!Error handling
+
+<a href name="Error handling"></a>
+<div class="title-block">
+    <i class="attention"></i>Error handling
+</div>
+
 So <code>then</code> takes two arguments, one for success, one for failure(or fulfill and rejected in promise-speak). We can also use <code>catch</code> method:
 
 [javascript]
@@ -128,3 +159,8 @@ sendRequest({url: 'example.json'}).then(function(response) {
     console.error('Failed', error);
 });
 [/javascript]
+
+Article which save my day
+<ul>
+    <li>on <a href="http://www.html5rocks.com/en/tutorials/es6/promises/">html5rocks.com</a></li>
+</ul>
