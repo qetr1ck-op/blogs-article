@@ -1,14 +1,14 @@
 Reverting a single file to previous version
 
-We've made some number of commits, five of which changed a given file, and we want to revert the file to one of the previous versions. First of all, git doesn't keep version numbers for individual files. It just tracks content - a commit is essentially a snapshot of the work tree, along with some meta-data (e.g. commit message). So, we have to know which commit has the version of the file we want. Once we know that, we'll need to make a new commit reverting the file to that state.
+We've made some number of commits and we want to revert the file to one of the previous versions. First of all, git doesn't keep version numbers for individual files. It just tracks content - a commit is essentially a snapshot of the work tree, along with some meta-data (e.g. commit message). So, we have to know which commit has the version of the file we want. Once we know that, we'll need to make a new commit reverting the file to that state.
 
 <ol>
 	<li>
-		Find right commit
+		Find right commit:
 		[bash]git log (-p) path/to/file[/bash]
 	</li>
 	<li>
-		Or with command
+		Or with command:
 		[bash]gitk path/to/file[/bash]
 	</li>
 	<li>
