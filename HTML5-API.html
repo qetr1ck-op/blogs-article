@@ -1,0 +1,127 @@
+HTML5 API
+
+http://upload.wikimedia.org/wikipedia/commons/7/7f/HTML5_APIs_and_related_technologies_taxonomy_and_status.svg
+
+In addition to specifying markup, HTML5 specifies  APIs that can be used through Javascript:
+
+<ul>
+    <li>1</li>
+</ul>
+
+I'm sure that you know that are two version of the HTML5 specification, one maintenance be the <a href="www.w3.org">W3C</a> and another by the <a href="https://wiki.whatwg.org/wiki/FAQ#What_is_the_WHATWG.3F">WHATWG</a>. Generally, the living HTML5 APIs maintained by W3C and WHATWG add additional APIs.
+
+We'll start by looking at the APIs in the W3C HTML5 spec.
+
+!! Media API
+
+The media API is part of the media element which includes two HTML5 children, the <code>video</code> and <code>audio</code> elements. There are a number of Javasript API methods available methods, the <code>play()</code> and <code>pause()</code> as well as <code>load()</code> and <code>canPlayType()</code>.
+
+To find out more, take look at the following article <a href="https://code.tutsplus.com/tutorials/html5-audio-and-video-what-you-must-know--net-15545">HTML5 audio and video: what you must know, NetTuts</a>
+
+!! Drag'n'Drop
+
+The drag and drop API currently supported in all modern browsers. And it's bring native drag and drop support to the browser. By adding <code>draggable = "true"<code> attribute, the user has ability to move any element. Then add event handlers on a target drop zone to tell the browser where the element can be dropped.
+
+Using the API, user could drag and image from the desktop into the browser and more example you may find at<a href="http://www.html5rocks.com/en/tutorials/dnd/basics/">HTML5 rocks</a>
+
+!! Off line Web Applications . Application Cashe
+
+Application caching is carried out by a simple manifest file which lists the files that are required for the application to work off-line. Authors can then ensure their sites functionary off-line. The manifest causes the user's browser to keep a copy of files for use off-line later. When a user view the document / application without network access, the browser swithces to use local copies instead. So in theory you should be able to finish writing an important email or playing web version of Angry birds without connectivity.
+
+Read more, on <a href="http://www.html5rocks.com/en/tutorials/appcache/beginner/">A Beginner's Guide to Using the Application Cache</a> and <a href="https://developer.mozilla.org/en-US/docs/Web/HTML/Using_the_application_cache#Testing_for_updates_to_the_cache_manifest">Using the application cache</a>
+
+!! User Interaction
+
+Setting the attribute <code>contenteditable = "true"</code> indicates that the element is editable. Authors could then, for example can combine this with local storage to track changes to documents.
+
+For more information use <a href="http://html5demos.com/contenteditable"> demo</a>
+
+!! History
+
+Ajax-y web applications break it at their peril. Using HTML5 History API, developers have a lot more control over history state of user's browser session.
+
+The API allowed us to send users forward or back and check the length of the history, add and removes entries in the user's historym hold data to restore page state and aupdate the URL without refreshing the page.
+
+For more detail on the History API follow <a href="http://html5demos.com/history/third">example</a> and read <a href="http://html5demos.com/history/third">API documentation</a>
+
+!! APIS in the WHATWG specification
+
+So far we've looked at specs that exists in both the W#C and WHATWG version of HTML5. I'll now very briefly introduce a few more APIs that are documented in WHATWG's living standard but have been broken into smaller, more manageable be the W3C.
+
+!! Canvas 2D Context
+
+Using canvas with 2D Context API allow to draw natively in the browser. The API is extensive and pretty much all canvas articles introduce method and events to work with <a href="http://www.html5rocks.com/en/tutorials/canvas/integrating/#fur">Integrating Canvas into your Web App</a> and <a href="https://developer.mozilla.org/en-US/docs/Web/API/Canvas_API/Tutorial/Drawing_shapes">Full Canvas tutorial</a>
+
+!! Web Storage
+
+When web developers think of storing anything about the user, they immediately think of uploading to the server. HTML5 changes that, as there are now several technologies allowing the app to save data on the client device. There are two main reasons to do this: (a) to make the web app available off-line; (b) to improve performance.
+
+Related APIs: <code>Web Storage</code>, <code>Web SQL Database</code>, <code>Indexed Database</code>, and <code>File Access</code>.
+
+Awesome article <a href="http://www.html5rocks.com/en/tutorials/offline/storage/">Client-Side Storage</a> and related <a href="http://www.html5rocks.com/en/tutorials/offline/whats-offline/">"Offline": What does it mean and why should I care?</a>
+
+!! Web Workers
+
+An API that running Javascript in the background independent of any user scripts. Allows for long running tasks without preventing the page from becoming unresponsive.
+
+More in <a href="http://www.html5rocks.com/en/tutorials/workers/basics/">The Basics of Web Workers</a>
+
+!! Web Sockets
+
+Bi-directional communication over the Web: Both the server and client can send data at any time, or even at the same time. Only the data itself is sent, without the overhead of HTTP headers, dramatically reducing bandwidth.
+
+Here is a <a href="http://slides.html5rocks.com/#web-sockets">demo</a>
+
+!! Server Sent Events
+
+The idea behind <code>SSEs</code> may be familiar, a web app "subscribe" to a stream of updates generated by a server and, whenever a new event occurs, a notification is sent to the client.
+
+Great article <a href="http://www.html5rocks.com/en/tutorials/eventsource/basics/">Stream Updates with Server-Sent Events</a>
+
+!! The HTML5 "buzzword" APIs
+
+Rest of APIs that are closely related to HTML5 and often incorrectly described as HTML5 are Geolocation, Selectors, File System, SVG, Touch Event you can find in <a href="https://platform.html5.org/">the web platform and browser technologies</a>
+
+http://media.creativebloq.futurecdn.net/sites/creativebloq.com/files/images/2013/05/Hannah/platform-html5.jpg
+
+!! Demos and browser support
+
+<ul>
+    <li>Offline / Storage
+        <ul>
+            <li><a href="http://slides.html5rocks.com/#web-storage">Web Storage</a></li>
+            <li><a href="http://slides.html5rocks.com/#web-sql-db">Web SQL Database</a></li>
+            <li><a href="http://slides.html5rocks.com/#indexed-db">IndexDB</a></li>
+            <li></li>
+            <li><a href="http://slides.html5rocks.com/#app-cache">Application Cashe</a></li>
+            <li><a href="http://slides.html5rocks.com/#web-workers">Web Workers</a></li>
+            <li><a href="http://slides.html5rocks.com/#web-sockets">Web Socket</a></li>
+            <li><a href="http://slides.html5rocks.com/#notifications-api">Server Sent Events / Notifications</a></li>
+        </ul>
+    </li>
+    <li>File / Hardware Access
+        <ul>
+            <li><a href="http://slides.html5rocks.com/#native-drag-and-drop">Native Drag'n'Drophttp://slides.html5rocks.com/#native-drag-and-drop</a></li>
+            <li><a href="http://slides.html5rocks.com/#desktop-drag-in">File System</a> and <a href="http://slides.html5rocks.com/#filewriter">this</a></li>
+            <li><a href="http://slides.html5rocks.com/#geolocation">Geolocationhttp://slides.html5rocks.com/#geolocation</a></li>
+            <li><a href="http://slides.html5rocks.com/#slide-orientation"></a>Device Orientation</li>
+            <li><a href="http://slides.html5rocks.com/#speech-input"></a>Speech Input</li>
+        </ul>
+    </li>
+    <li>Graphics / Multimedia
+        <ul>
+            <li><a href="http://slides.html5rocks.com/#video-audio">Audio & Video</a></li>
+            <li><a href="http://slides.html5rocks.com/#video-track">Text Track</a></li>
+            <li><a href="http://slides.html5rocks.com/#fullscreen-api">Full Screen</a></li>
+            <li><a href="http://slides.html5rocks.com/#canvas-2d">Canvas 2D</a> and <a href="http://slides.html5rocks.com/#canvas-2d-example">this</a></li>
+            <li><a href="http://slides.html5rocks.com/#canvas-3d">Canvas 3D</a></li>
+            <li><a href="http://slides.html5rocks.com/#inline-svg">SVG</a> and <a href="http://slides.html5rocks.com/#svg-example-slide">this</a></li>
+        </ul>
+    </li>
+ </ul>
+
+ And more here <a href="http://html5demos.com/">HTML5 Demos and Examples</a>
+
+
+
+http://en.wikipedia.org/wiki/HTML5
