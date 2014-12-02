@@ -118,4 +118,14 @@ Have you ever used a grid system, and what do you prefer?
 http://css-tricks.com/dont-overthink-it-grids/
 
 Have you used or implemented media queries or mobile specific layouts/CSS?
-http://blog.teamtreehouse.com/modern-field-guide-responsive-web-design?utm_source=Treehouse+Pals+Newsletter&utm_medium=email&utm_campaign=24c69e637d-TH_BLOG_RSS_EMAIL_CAMPAIGN&utm_term=0_a9464578f3-24c69e637d-32861725
+
+There are a lot web capable devices so it's impossible o target each individual screen. Instead, it's better to let the web site <code>respond</code> and adapt fluidly. One of my favorite quotes: "Empty your mind be formless - like water. Not put water in a cup, it becomes a cup. You put water into a bottle, it becomes a bottle. You put in a teapot it becomes the teapot. Be water my friend."
+
+Practically speaking this involves three main principles that come to achieve responsive design:
+
+<ol>
+	<li>Fluid Grids - target / context = result</li>
+	<li>Fluid Images - img { max-width: 100%; }</li>
+	<li>Media Queries - @media screen and (min-width: 600px) { /* ...desktop styles here... */ }</li>
+</ol>
+

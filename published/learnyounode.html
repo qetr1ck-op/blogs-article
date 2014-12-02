@@ -1,0 +1,258 @@
+learnyounode solutions
+
+Write a program that accepts one or more numbers as command-line arguments and prints the sum of those numbers
+to the console (<code>stdout</code>).
+
+[javascript]
+var result = 0;
+
+Array.prototype.forEach.call(process.argv, function (elem, i) {
+    if (i >= 2) {
+        result += +elem;
+    }
+});
+
+console.log(result);
+[/javascript]
+
+Write a program that uses a single synchronous and asynchronous file system operation to read a file and print the numbers of new line it contains to the console (stdout).
+
+[javascript]
+var fs = require('fs');
+
+var filename = process.argv[2];
+
+file = fs.readFileSync(filename);
+
+console.log(file.split('\n').length - 1);
+[/javascript]
+
+and
+
+[javascript]
+var fs = require('fs');
+
+var filename = process.argv[2];
+
+file = fs.readFile(filename, function(err, data) {
+    if (err) {
+        console.err(err);
+        return;
+    }
+    console.log(data.toString().split('\n').length - 1);
+});
+[/javascript]
+
+Create a program that prints a list of files in a given directory, filtered by the extension of files.
+
+[javascript]
+var fs = require('fs'),
+    path = require('path'),
+    dirName = process.argv[2],
+    ext = process.argv[3];
+
+fs.readdir(dirName, function (err, files) {
+    if (err) {
+        console.error(err);
+        return;
+    }
+    Array.prototype.forEach.call(files, function (el) {
+        if (path.extname(el).slice(1) === ext) {
+            console.log(el);
+        }
+    });
+});
+
+[/javascript]
+
+The same using modular approach.
+
+[javascript]
+//main.js
+var module = require('./module.js'),
+    dirName = process.argv[2],
+    ext = process.argv[3];
+
+module(dirName, ext, function (err, files) {
+    if (err) {
+        console.error(err);
+        return;
+    }
+    files.forEach(function (el) {
+        console.log(el);
+    });
+});
+
+//module.js
+module.exports = function (dirName, ext, callback) {
+    var fs = require('fs'),
+        path = require('path'),
+        files = [];
+
+    fs.readdir(dirName, function (err, files) {
+        if (err) {
+            return callback(err);
+        }
+        files = files.filter(function (el) {
+            if (path.extname(el).slice(1) === ext) {
+                return el;
+            }
+        });
+        return callback(null, files);
+    });
+};
+[/javascript]
+
+Write a program that performs an HTTP GET request to a URL, provided as first command-line argument. Write the String content of each 'data' event from the response.
+
+[javascript]
+var http = require('http'),
+    url = process.argv[2];
+
+http.get(url, function (res) {
+    res.on('data', function (data) {
+        console.log(data.toString());
+    });
+});
+[/javascript]
+
+and with complete string of characters sent from server:
+
+[javascript]
+var http = require('http'),
+    url = process.argv[2],
+    result = '';
+
+http.get(url, function (res) {
+    res.on('data', function (data) {
+        result += data.toString();
+    });
+    res.on('end', function (data) {
+        console.log(result.length);
+        console.log(result);
+    });
+});
+[/javascript]
+
+The problem is the same as the previous example to use http.get(). However, this time you will be provided with three URLs as the first three command-line arguments. The catch is that you need to stdout them in the same order.
+
+[javascript]
+var http = require('http');
+
+var urls = process.argv.slice(2);
+var results = [];
+
+// initialise results array
+for (i = 0; i < urls.length; i++) {
+  results[i] = null;
+}
+
+for (i = 0; i < urls.length; i++) {
+  (function(i) {
+    http.get(urls[i], function(request) {
+      var result = "";
+      request.setEncoding("utf8");
+      request.on("data", function(data) {
+        result += data;
+      });
+      request.on("end", function() {
+        results[i] = result;
+        var resultCount = 0;
+        for (j = 0; j < results.length; j++) {
+          if (results[j] != null) resultCount++;
+        }
+        if (resultCount == results.length) {
+          for (j = 0; j < results.length; j++) {
+            console.log(results[j]);
+          }
+        }
+      });
+    });
+  })(i);
+}
+[/javascript]
+
+Write a TCP time server.
+
+[javascript]
+var net = require('net'),
+    strftime = require('strftime'),
+    port = process.argv[2];
+
+net.createServer(function (socket) {
+    var date = new Date();
+    socket.end(strftime('%F %T', date).slice(0, -3));
+}).listen(port);
+[/javascript]
+
+Write a HTTP server that serves the text file for each request it receives. 
+
+[javascript]
+var http = require('http'),
+    fs = require('fs'),
+    filePath = process.argv[3],
+    port = process.argv[2];
+
+var file = fs.createReadStream(filePath);
+
+http.createServer(function (req, res) {
+    file.pipe(res);
+}).listen(port);
+[/javascript]
+
+Write a HTTP server that receives only POST requests and converts incoming POST body characters to upper-case and returns it to the client.
+
+[javascript]
+var http = require('http'),
+    map = require('through2-map');
+port = process.argv[2];
+
+var toUC = map(function (chunk) {
+    return chunk.toString().toUpperCase();
+});
+
+http.createServer(function (req, res) {
+    req.pipe(toUC).pipe(res);
+}).listen(port);
+[/javascript]
+
+Write a HTTP server that serves JSON data then it receives a GET request. Example of GET request: "api/parsetime?iso=2013-08019T12:10:15.474z".
+
+[javascript]
+var http = require('http'),
+    url = require('url');
+
+function parseRoutes(url) {
+    if (url.pathname === '/api/parsetime') {
+        var date = new Date(url.query.iso);
+        return {
+            hour: date.getHours(),
+            minute: date.getMinutes(),
+            second: date.getSeconds()
+        };
+    } else if (url.pathname === '/api/unixtime') {
+        return {
+            unixtime: new Date(url.query.iso).getTime()
+        };
+    } else return null;
+}
+
+var server = http.createServer(function (req, res) {
+    var urlPath = url.parse(req.url, true),
+        resourse = parseRoutes(urlPath);
+
+    res.end(JSON.stringify(resourse));
+
+    if (resourse) {
+        res.writeHead(200, {
+            'Content-Type': 'application/json'
+        });
+        res.end(JSON.stringify(resourse));
+    } else {
+        res.writeHead(404);
+        res.end();
+    }
+
+});
+server.listen(process.argv[2]);
+[/javascript]
