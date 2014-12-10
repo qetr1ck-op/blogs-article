@@ -1,0 +1,79 @@
+<div class="wp-center">
+<img src="../source/images/..." alt="" width="500px"/>
+</div>
+
+<ul style="list-style: none;">
+    <li><a class="link-icon" href="/promises-in-javascript/#Promises libraries and native Javascript promise object"></a>Promises libraries and native Javascript promise object</li>
+    <li><a class="link-icon" href="/promises-in-javascript/#Browser support and polyfill"></a>Browser support and polyfill</li>
+    <li><a class="link-icon" href="/promises-in-javascript/#Promisifying XMLHttpRequest"></a>Promisifying XMLHttpRequest</li>
+    <li><a class="link-icon" href="/promises-in-javascript/#Promise chaining"></a>Promise chaining</li>
+    <li><a class="link-icon" href="/promises-in-javascript/#Error handling"></a>Error handling</li>
+</ul>
+<!--more-->
+
+<a href name="Why, Who and WHAT?"></a>
+<div class="title-block">
+    <i class="attention"></i>Why, Who and WHAT?
+</div>
+
+
+<a href="https://www.firebase.com/">Firebase</a> is developed by Google and its a rich API to store and sync data in realtime. Firebase has full-featured libraries for support all major web framework.
+
+AngularFire is the officially supported by AngularJS binding fir Firebase. The combination of Angular and Firebase provides a <code>three-way</code> between your Firebase data store and Angular's bindings (i.e. JavaScript variables to DOM elements).
+
+<a href name="Quick start"></a>
+<div class="title-block">
+    <i class="attention"></i>Quick start
+</div>
+
+Simply include source from CDN:
+
+[html]
+<!-- Angular -->
+<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.3.2/angular.min.js"></script>
+
+<!-- Firebase -->
+<script src="https://cdn.firebase.com/js/client/2.0.4/firebase.js"></script>
+
+<!-- AngularFire -->
+<script src="https://cdn.firebase.com/libs/angularfire/0.9.0/angularfire.min.js"></script>
+[/html]
+
+Also sources are available via <a href="http://bower.io/search/?q=firebase">Bower</a> or <a href="https://github.com/firebase/generator-angularfire">Yeoman</a> scaffolding.
+
+Next we need to include ANgularFire service by adding <code>'firebase'</code> as a module dependency in our app. And than inject dependency the <code>$firebase</code> into a controller, factory, or service.
+
+[javascript]
+var app = angular.module('app', ['firebase']);
+
+app.controller('MainCtrl', function($scope, $firebase) {
+    var ref = new Fireabase("https://<your-firebase>.firebaseio.com/");
+    var sync = $firebase(ref);
+})
+[/javascript]
+
+<a href name="Synchronize data with $asObject(). Thee way data-binding."></a>
+<div class="title-block">
+    <i class="attention"></i>Synchronize data with $asObject(). Thee way data-binding
+</div>
+
+Keep in mind that <code>$firebase</code> does not actually download any data from the Firebase server until <code>$asArray()</code> or <code>$asObject()</code> are called.
+
+The full list for <code>$firebase</code> methods can be found in the <a href="https://www.firebase.com/docs/web/libraries/angular/api.html#firebaseobject">API documentation</a>.
+
+Synchronizing changes from the server is pretty magical via <code>$save()</code>. To achieve three-way data binding simply call <code>$bindTo()</code> on a synchronized object and now any changes in the DOM are pushed to Angular, and then automatically to Firebase. And inversely, any changes on the server get pushed into Angular and straight to the DOM:
+
+<p data-height="495" data-theme-id="10606" data-slug-hash="QwyJvg" data-default-tab="result" data-user="qetr1ck-op" class='codepen'>See the Pen <a href='http://codepen.io/qetr1ck-op/pen/QwyJvg/'>Synchronize data with $asObject(). Thee way data-binding</a> by qetr1ck-op (<a href='http://codepen.io/qetr1ck-op'>@qetr1ck-op</a>) on <a href='http://codepen.io'>CodePen</a>.</p>
+<script async src="//assets.codepen.io/assets/embed/ei.js"></script>
+
+<a href name="Synchronize Arrays with $asArray()"></a>
+<div class="title-block">
+    <i class="attention"></i>Synchronize Arrays with $asArray()
+</div>
+
+Synchronized arrays should be used for any list of objects that will be sorted, iterated and have unique IDs. The complete list of methods can be found in the <a href="https://www.firebase.com/docs/web/libraries/angular/api.html#firebasearray">API</a> for <code>$FirebaseArray</code>.
+
+The contents of this array are synchronized with a remote server, and AngularFire controls adding, removing, and ordering the elements. Because of this special arrangement, AngularFire provides the concurrency safe methods <code>$add()</code>, <code>$remove()</code>, and <code>$save()</code> to modify the array elements.
+
+<p data-height="331" data-theme-id="10606" data-slug-hash="ByjXeq" data-default-tab="result" data-user="qetr1ck-op" class='codepen'>See the Pen <a href='http://codepen.io/qetr1ck-op/pen/ByjXeq/'>Synchronize Arrays with $asArray()</a> by qetr1ck-op (<a href='http://codepen.io/qetr1ck-op'>@qetr1ck-op</a>) on <a href='http://codepen.io'>CodePen</a>.</p>
+<script async src="//assets.codepen.io/assets/embed/ei.js"></script>
