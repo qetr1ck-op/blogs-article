@@ -7,6 +7,7 @@
     <li><a class="link-icon" href="/promises-in-javascript/#Quick start"></a>Quick start</li>
     <li><a class="link-icon" href="/promises-in-javascript/#Synchronize data with $asObject(). Thee way data-binding."></a>Synchronize data with $asObject(). Thee way data-binding.</li>
     <li><a class="link-icon" href="/promises-in-javascript/#Synchronize Arrays with $asArray()"></a>Synchronize Arrays with $asArray()</li>
+    <li><a class="link-icon" href="/promises-in-javascript/#User Authentication"></a>User Authentication</li>
 </ul>
 <!--more-->
 
@@ -76,3 +77,24 @@ The contents of this array are synchronized with a remote server, and AngularFir
 
 <p data-height="331" data-theme-id="10606" data-slug-hash="ByjXeq" data-default-tab="result" data-user="qetr1ck-op" class='codepen'>See the Pen <a href='http://codepen.io/qetr1ck-op/pen/ByjXeq/'>Synchronize Arrays with $asArray()</a> by qetr1ck-op (<a href='http://codepen.io/qetr1ck-op'>@qetr1ck-op</a>) on <a href='http://codepen.io'>CodePen</a>.</p>
 <script async src="//assets.codepen.io/assets/embed/ei.js"></script>
+
+<a href name="User Authentication"></a>
+<div class="title-block">
+    <i class="attention"></i>User Authentication
+</div>
+
+Firebase provides a full set of authentication options out-of-the-box for email & password auth and third-party providers as Facebook, Twitter, GitHub, and Google.
+
+When a suer authenticates to a Firebase app, two things happen:
+<ul>
+    <li>Information about the user is returned in callbacks on the client device. It allows you to customize app user experience;</li>
+    <li>The value of the <code>auth</code> cariable in app become defined. Read more about <a href="https://www.firebase.com/docs/security/guide/securing-data.html">Secuirty and Firebase rules</a>. This var is <code>null</code> for unauthenticated users, but for authenticated users it becomes object with user's unique <code>auth.uid</code> and other data about user.</li>
+</ul>
+
+AngularFire provides a service <code>$firebaseAuth</code>. Whenever the user is authenticated you can use synchronous <code>$getAuth()</code> for retrieve current user auth state which include user's <code>uid</code> and <code>provider</code>.
+
+More about authentication with different methods see on off <a href="https://www.firebase.com/docs/web/libraries/angular/guide.html#section-angular-authentication">demos</a>
+
+
+https://sheduleapp.firebaseio.com/
+https://auth.firebase.com/v2/sheduleapp.firebaseio.com/auth/facebook/callback

@@ -16,7 +16,7 @@ We can use this stored data wit JavaScript tp create a richer user experience. I
 [/html]
 
 [javascript]
-console.log(document.getElementById('foo').dataSet.secretInfo) // foo
+console.log(document.getElementById('foo').dataSet.secretInfo; // foo
 //IE <= 9
 console.log(document.getElementById('foo').getAttribute('data-secret-info')) //foo
 console.log($('#foo').data('secretInfo')) //foo
