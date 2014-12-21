@@ -1,0 +1,216 @@
+Developers commonly wonder whether there is an <code>ideal</code> set of pattern for using in work-flow. There isn't a true single answer to this question. Each script or web application we work on is likely to have its own individual needs.
+
+In this list Oddy Osmany explore JavaScript implementation of both classic and modern design patterns:
+
+<ul style="list-style: none;">
+    <li><a class="link-icon" href="/.../#Constructor Pattern"></a>What is AMD?</li>
+    <li><a class="link-icon" href="/.../#Module & Revealing Module"></a>Module & Revealing</li>
+    <li><a class="link-icon" href="/.../#Singelton"></a>Singelton</li>
+    <li><a class="link-icon" href="/.../#Observer"></a>Observer</li>
+    <li><a class="link-icon" href="/.../#Mediator"></a>Mediator</li>
+    <li><a class="link-icon" href="/.../#Prototype"></a>Prototype</li>
+    <li><a class="link-icon" href="/.../#Command"></a>Command</li>
+    <li><a class="link-icon" href="/.../#Facade"></a>Facade</li>
+    <li><a class="link-icon" href="/.../#Factory"></a>Factory</li>
+    <li><a class="link-icon" href="/.../#Mixin"></a>Mixin</li>
+    <li><a class="link-icon" href="/.../#Decorator"></a>Decorator</li>
+    <li><a class="link-icon" href="/.../#Flyweight"></a>Flyweight</li>
+</ul>
+<!--more-->
+
+<a href name="Constructor Pattern"></a>
+<div class="title-block">
+    <i class="attention"></i>Constructor Pattern
+</div>
+
+In classical OOP languages, as constructor is a special method used to init a newly created object. 
+
+In JS, as almost everything is an objects, we're interesting in <code>object constructors</code>.
+
+<code>Object constructors</code> are used to create specific types of objects -  by simply call to a constructor function with the keyword "new", we can tell JavaScript we would like the function to behave like a constructor and instantiate a new object with the members defined by that function.
+
+Inside a constructor, the keyword <code>this</code> reference to new object.
+
+[javacript]
+function Car( model, year, miles ) {
+  this.model = model;
+  this.year = year;
+  this.miles = miles;
+}
+ 
+ 
+// Note here that we are using Object.prototype.newMethod rather than
+// Object.prototype so as to avoid redefining the prototype object
+Car.prototype.toString = function () {
+  return this.model + " has done " + this.miles + " miles";
+};
+ 
+// Usage:
+ 
+var civic = new Car( "Honda Civic", 2009, 20000 );
+var mondeo = new Car( "Ford Mondeo", 2010, 5000 );
+ 
+console.log( civic.toString() );  // Honda Civic has done 20000 miles
+console.log( mondeo.toString() ); // Ford Mondeo has done 5000 miles
+[/javacript]
+
+<a href name="Module & Revealing Module"></a>
+<div class="title-block">
+    <i class="attention"></i>Module & Revealing Module
+</div>
+
+Modules typically help keeping the units of code for a project both cleanly separated and organized. In JS are several options for implement modules:
+
+<ul>
+ 	<li>The Module Pattern</li>
+ 	<li>Object literal notation</li>
+ 	<li>AMD & CommonJS modules</li>
+ 	<li>ECMAScript Harmony modules</li>
+ </ul> 
+
+The Module pattern encapsulates state and organization using closures. Module provides a way for wrapping public and private methods and vars, protecting from leaking into the global scope and accidentally conflict with another developer's interface.
+
+With Module pattern, only a public API is returned, keeping everything in the closure private. 
+
+[javascipt]
+//Global module with import mixins
+var myNamespace = (function ($, _) {
+ 
+  var myPrivateVar, myPrivateMethod;
+ 
+  // A private counter variable
+  myPrivateVar = 0;
+ 
+  // A private function which logs any arguments
+  myPrivateMethod = function( foo ) {
+      console.log( foo );
+      console.log( myPrivateVar );
+  };
+ 
+  return {
+ 
+    // A public variable
+    myPublicVar: "foo",
+ 
+    // A public function utilizing privates
+    myPublicFunction: function( bar ) {
+ 
+      // Increment our private counter
+      myPrivateVar++;
+ 
+      // Call our private method using bar
+      myPrivateMethod( bar );
+ 
+    }
+  };
+ 
+})(jQuery, _, undefined);
+
+myNamespace.myPublicFunction('foo'); // foo 1
+[/javascipt]
+
+Revealing Module patten define all of our function an vars in the private scope and return an  object with pointers to the private functionality.
+
+[javascipt]
+var myRevealingModule = (function () {
+    var privateVar = "Ben Cherry",
+        publicVar  = "Hey there!";
+
+    function privateFunction() {
+        console.log( "Name:" + privateVar );
+    }
+
+    function publicSetName( strName ) {
+        privateVar = strName;
+    }
+
+    function publicGetName() {
+        privateFunction();
+    }
+
+
+    // Reveal public pointers to
+    // private functions and properties
+    return {
+        setName: publicSetName,
+        greeting: publicVar,
+        getName: publicGetName
+    };
+
+})();
+
+myRevealingModule.setName('Sam Winchester');
+myRevealingModule.greeting; 					// "Hey there!"
+myRevealingModule.getName();					// "Name:Sam Winchester"
+[/javascipt]
+
+<a href name="Singelton"></a>
+<div class="title-block">
+    <i class="attention"></i>Singelton
+</div>
+
+Classically, the Singelton pattern can be implemented by creating a class with a method that creates a new instance of the class if one doesn't exist, or it simply, return a reference to the object.
+
+[javascipt]
+var mySingleton = (function () {
+ 
+  // Instance stores a reference to the Singleton
+  var instance;
+ 
+  function init() {
+ 
+    // Singleton
+ 
+    // Private section
+    function privateMethod(){
+        console.log( "I am private" );
+    }
+ 
+    var privateVariable = "Im also private";
+ 
+    var privateRandomNumber = Math.random();
+ 
+    return {
+ 
+      // Public section
+      publicMethod: function () {
+        console.log( "The public can see me!" );
+      },
+ 
+      publicProperty: "I am also public",
+ 
+      getRandomNumber: function() {
+        return privateRandomNumber;
+      }
+ 
+    };
+ 
+  };
+ 
+  return {
+ 
+    // Get the Singleton instance if one exists
+    // or create one if it doesn't
+    getInstance: function () {
+ 
+      if ( !instance ) {
+        instance = init();
+      }
+ 
+      return instance;
+    }
+ 
+  };
+ 
+})();
+
+var singleA = mySingleton.getInstance();
+var singleB = mySingleton.getInstance();
+console.log( singleA.getRandomNumber() === singleB.getRandomNumber() ); // true
+[/javascipt]
+
+<a href name="Observer"></a>
+<div class="title-block">
+    <i class="attention"></i>Observer
+</div>
+
