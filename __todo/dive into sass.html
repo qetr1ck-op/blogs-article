@@ -1,0 +1,52 @@
+Sass adds <code>//</code> for single line comments - not output after compile
+
+1.png
+
+@import happens during compile rather than client-side. File extension is optional. Adding an underscore creates a partial, will not compile to <code>.css</code>.
+
+2,3.png
+
+Nested with <code>&</code> references to the parent selector.
+
+4.png
+
+Variables aka reusable values names begin with <code>$</code> like a <code>$baseColor</code>. Vars can optionally take the <code>!default</code> flag.
+
+5
+
+Use the Ruby's <code>#{$var}</code> to shim variables into selectors, property names, and strings.
+
+6
+
+Mixins are blocks of reusable code that take optional arguments
+
+7,8
+
+Optionally mixins arguments and interpolation + mixin:
+
+9,10
+
+Extend 
+
+11
+
+Avoid extra classes with <code>%</code>
+
+12
+
+Sassy tips:
+<ul>
+	<li>SASS is not Sass</li>
+	<li>Try to limit nesting to 3 or levels or consider refactoring</li>
+	<li>Make sure the <code>@mixin</code> comes before the <code>@include</code> blocks</li>
+	<li><code>@include</code> = use a mixin</li>
+	<li><code>@include</code> = import a file</li>
+	<li>Versions of IE prior to 9 have a limit of 4095 selectors-per CSS file limit</li>
+	<li></li>
+	<li></li>
+	<li></li>
+	<li></li>
+</ul>
+
+
+

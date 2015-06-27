@@ -24,7 +24,9 @@ WebDeveloper.sayHi = function () {
 
 var webDeveloper = Object.create(WebDeveloper).constructor('John', 22);
 
-//=====
+/**
+ *
+ */
 function Person(options) {
     this.name = options.name;
     this.gender = options.gender || 'male';

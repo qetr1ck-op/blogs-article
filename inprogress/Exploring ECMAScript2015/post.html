@@ -1,0 +1,144 @@
+<div class="wp-center">
+    <a href="TODO">
+        <img src="../source/images/title.png" alt="" width="600px"/>
+    </a>
+</div>
+
+<ul style="list-style: none;">
+    <li><a class="link-icon" href="/arrow-function/#arrow-function"></a>arrow-function</li>
+    <li><a class="link-icon" href="/TODO/#TODO"></a>TODO</li>
+    <li><a class="link-icon" href="/TODO/#TODO"></a>TODO</li>
+    <li><a class="link-icon" href="/TODO/#TODO"></a>TODO</li>
+    <li><a class="link-icon" href="/TODO/#TODO"></a>TODO</li>
+</ul>
+
+<!--more-->
+
+<a href name="TODO"></a>
+<div class="title-block">
+    Arrow function
+</div>
+
+The "fat" arrow <code>=></code> (the opposet to the thin arrow <code>-></code>) was chosen to compatible with CoffeeScript style.
+
+Specifying parameters:
+
+[javascript]
+    () => { ... } //no parameter
+    x => { ... } //a one parameter
+    (x, y) => { ... } several params
+[/javascript]
+
+Specifying body:
+
+[javascript]
+    x => {return x * x} // block style
+    x => x * x //expression, equivalent to previous line
+
+    let squares = [1, 2, 3].map(x => x * x) // a real example
+[/javascript]
+
+There are two benefits to use arrow functions:
+
+<ol>
+    <li>They are less verbose than traditional function expression</li>
+    <li>Their <code>this</code> picked up from surrounding (lexical scope), e.g. you don't need to use <code>bind</code> or <code>self = this</code></li>
+</ol>
+
+Traditional functions can be used as:
+
+<ol>
+    <li>Non-method function</li>
+    <li>Methods</li>
+    <li>Constructors</li>
+</ol>
+
+The problems appear in 2 and 3, when function has always their own <code>this</code>. Example of problem in ES5:
+
+[javascript]
+    function Prefixer(prefix) {
+        this.prefix = prefix;
+    }
+    Prefixer.prototype.prefixArray = function (arr) {
+        'use strict';
+        return arr.map(function (x) {
+            // Doesn’t work:
+            return this.prefix + x; // this = undefined, in "non-strict" mode this = window
+        });
+    };
+[/javascript]
+
+Solution with <code>self = this</code>:
+
+[javascript]
+function Prefixer(prefix) {
+    this.prefix = prefix;
+}
+Prefixer.prototype.prefixArray = function (arr) {
+    var self = this; // store in closure
+    return arr.map(function (x) {
+        return self.prefix + x;
+    });
+};
+[/javascript]
+
+Solution with specifying value for<code>this</code>:
+
+[javascript]
+function Prefixer(prefix) {
+    this.prefix = prefix;
+}
+Prefixer.prototype.prefixArray = function (arr) {
+    return arr.map(function (x) {
+        return this.prefix + x;
+    }, this); // a few array methods have an extra last parameter for specifying value to "this"
+};
+[/javascript]
+
+Solution with <code>bind(this)</code>:
+
+[javascript]
+function Prefixer(prefix) {
+    this.prefix = prefix;
+}
+Prefixer.prototype.prefixArray = function (arr) {
+    return arr.map(function (x) {
+        return this.prefix + x;
+    }.bind(this)); // now this not depends of context calling, "this" is always the same value
+};
+[/javascript]
+
+ES2015 solution:
+
+[javascript]
+function Prefixer(prefix) {
+    this.prefix = prefix;
+}
+Prefixer.prototype.prefixArray = function (arr) {
+    return arr.map((x) => {
+        return this.prefix + x;
+    });
+};
+
+//fully ES2015-ify the code:
+
+class Prefixer {
+    constructor(prefix) {
+        this.prefix = prefix;
+    }
+    prefixArray(arr) {
+        return arr.map(x => this.prefix + x); // has lexical "this", its determined by the surrounding scope
+    }
+}
+[/javascript]
+
+
+
+
+
+
+
+Article which saves my day:
+<ul>
+    <li>on <a href="http://TODO">TODO</a></li>
+</ul>
