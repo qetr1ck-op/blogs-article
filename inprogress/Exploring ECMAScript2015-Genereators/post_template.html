@@ -1,0 +1,194 @@
+<div class="wp-center">
+    <a href="TODO">
+        <img src="../source/images/TODO.png" alt="" width="TODOpx"/>
+    </a>
+</div>
+
+<ul style="list-style: none;">
+    <li><a class="link-icon" href="/TODO/#Basic usage"></a>Basic usage</li>
+    <li><a class="link-icon" href="/TODO/#Sending message in and out"></a>Sending message in and out</li>
+    <li><a class="link-icon" href="/TODO/#Compositions of generators (Delegation)"></a>Compositions of generators (Delegation), yield *</li>
+    <li><a class="link-icon" href="/TODO/#Going async with generators"></a>Going async with generators</li>
+    <li><a class="link-icon" href="/TODO/#TODO"></a>TODO</li>
+</ul>
+
+<!--more-->
+
+<a href name="Basic usage"></a>
+<div class="title-block">
+    Basic usage
+</div>
+
+[javascript]
+'use strict';
+
+function* generator() {
+    yield 1;
+    yield 2;
+    return 3;
+}
+
+let gen = generator();
+
+console.log(gen.next());  // {value: 1, done: false}
+console.log(gen.next());  // {value: 2, done: false}
+console.log(gen.next());  // {value: 3, done: true}
+
+for (let val of gen) {
+    console.log(val); // 1 2
+}
+[/javascript]
+
+
+<a href name="Sending message in and out"></a>
+<div class="title-block">
+    Sending message in and out
+</div>
+
+[javascript]
+'use strict';
+
+function* generator(start, end) {
+    for (let i = start; i <= end; i++) {
+        yield i;
+    }
+}
+
+let sequence = generator(2,5);
+
+for (let val of sequence) {
+    console.log(val); // 2 3 4 5
+}
+
+//Spread operator (...) not supported yet in iojs :(
+//console.log([...sequence]);
+[/javascript]
+
+
+<a href name="Compositions of generators (Delegation)"></a>
+<div class="title-block">
+    Compositions of generators (Delegation), yield *
+</div>
+
+[javascript]
+'use strict';
+
+//Compositions of generators (Delegation)
+function* generateSequence(start, end) {
+  for (let i = start; i <= end; i++) yield i;
+}
+
+function* generateAlphaNum() {
+    yield* generateSequence(48, 57); // "yield *" delegates iteration to "generateSequence()"
+    //the same as
+    //for (let i = 48; i <= 57; i++) yield i;
+}
+
+let str = '';
+
+for (let val of generateAlphaNum()) {
+    str += String.fromCharCode(val);
+}
+
+console.log(str); //1...9
+[/javascript]
+
+Another example:
+
+[javascript]
+'use strict';
+
+function* foo() {
+    let z = yield 3;
+    let w = yield 4;
+    console.log( "z: " + z + ", w: " + w );
+}
+
+function* bar() {
+    let x = yield 1;
+    let y = yield 2;
+    yield* foo(); // `yield*` delegates iteration control to `foo()`
+    let v = yield 5;
+    console.log( "x: " + x + ", y: " + y + ", v: " + v );
+}
+
+let it1 = bar();
+
+for (let val of it1) {
+  console.log(val); // 1 2 3 4 z: undefined, w: undefined 5 x: undefined, y: undefined, v: undefined
+}
+
+console.log('-----')
+
+let it2 = bar();
+console.log(it2.next()); // {value: 1, done: false}
+console.log(it2.next('The X')); // {value: 2, done: false}
+console.log(it2.next('The Y')); // {value: 3, done: false}
+console.log(it2.next('The Z')); // {value: 4, done: false}
+//z: The Z, w: The W
+console.log(it2.next('The W')); // {value: 5, done: false}
+//x: The X, y: The Y, v: The V
+console.log(it2.next('The V')); //{value: undefined, done: true}
+[/javascript]
+
+Another trick that <code>yield*</code> can receive a <code>return</code>ed value from delegated generator:
+
+[javascript]
+function* foo(param) {
+  yield 2;
+  return 'String from delegeted generator';
+}
+
+function* bar() {
+  yield 1;
+  let str = yield* foo(param);
+  console.log(str);
+  yield 3;
+}
+
+let it = bar();
+
+console.log(it.next()); //{value: 1, done: false}
+console.log(it.next()); //{value: 2, done: false}
+//String from delegeted generator
+console.log(it.next()); //{value: 3, done: false}
+console.log(it.next()); //{value: undefined, done: true}
+[/javascript]
+
+<a href name="Going async with generators"></a>
+<div class="title-block">
+    Going async with generators
+</div>
+
+The main principle:
+
+<ol>
+    <li>generator <code>yield</code> promises</li>
+    <li>helper function which do a dirty work and returns a result from promise when it is <code>fullfiled</code></li>
+</ol>
+
+The helper function in recursively style:
+
+[javascript]
+function runGenerator(generator, yieldValue) {
+
+}
+[/javascript]
+
+
+
+
+
+
+
+
+
+Article which saves my day:
+<ul>
+    <li>on <a href="http://TODO">TODO</a></li>
+</ul>
+
+
+
+
+

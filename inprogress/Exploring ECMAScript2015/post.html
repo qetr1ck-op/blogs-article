@@ -1,12 +1,6 @@
-<div class="wp-center">
-    <a href="TODO">
-        <img src="../source/images/title.png" alt="" width="600px"/>
-    </a>
-</div>
-
 <ul style="list-style: none;">
-    <li><a class="link-icon" href="/arrow-function/#arrow-function"></a>arrow-function</li>
-    <li><a class="link-icon" href="/TODO/#TODO"></a>TODO</li>
+    <li><a class="link-icon" href="/TOD/#arrow-function"></a>arrow-function</li>
+    <li><a class="link-icon" href="/TODO/#classes"></a>classes</li>
     <li><a class="link-icon" href="/TODO/#TODO"></a>TODO</li>
     <li><a class="link-icon" href="/TODO/#TODO"></a>TODO</li>
     <li><a class="link-icon" href="/TODO/#TODO"></a>TODO</li>
@@ -24,9 +18,9 @@ The "fat" arrow <code>=></code> (the opposed to the thin arrow <code>-></code>) 
 Specifying parameters:
 
 [javascript]
-    () => { ... } //no parameter
-    x => { ... } //a one parameter
-    (x, y) => { ... } several params
+    () => { ... } // no parameter
+    x => { ... } // a one parameter
+    (x, y) => { ... } // several params
 [/javascript]
 
 Specifying body:
@@ -82,7 +76,7 @@ Prefixer.prototype.prefixArray = function (arr) {
 };
 [/javascript]
 
-Solution with specifying value for<code>this</code>:
+Solution with specifying value for <code>this</code>:
 
 [javascript]
 function Prefixer(prefix) {
@@ -139,6 +133,139 @@ IIFE as arrow functions:
     return 123;
 })();
 [/javascript]
+
+<hr>
+
+<a href name="classes"></a>
+<div class="title-block">
+    Classes
+</div>
+
+Classes are syntactical sugar over existing prototyped-based inheritance. The class syntax doesn't introduce new object-orient inheritance model to JS. It just provides a much simpler and cleaner way to create object and dealing with inheritance.
+
+A class and subclass:
+
+[javascript]
+class Point {
+    constructor(x, y) {
+        this.x = x;
+        this.y = y;
+    }
+    toString() {
+        return `(${this.x}, ${this.y})`;
+    }
+}
+
+class ColorPoint extends Point {
+    constructor(x, y, color) {
+        super(x, y);
+        this.color = color;
+    }
+    toString() {
+        return super.toString() + ' in ' + this.color;
+    }
+}
+
+let cp = new ColorPoint(25, 8, 'green');
+
+cp.toString(); //'(25, 8) in green'
+
+cp instanceof ColorPoint; //true
+cp instanceof Point; //true
+
+console.log(Object.getPrototypeOf(cp) === ColorPoint.prototype
+            && cp.__proto__ === ColorPoint.prototype); // true
+
+console.log(Object.getPrototypeOf(cp) === Point
+            && cp.__proto__ === Point); // true
+[/javascript]
+
+Under the hood ES2015 <code>classes</code> are not something radically new:
+
+[javascript]
+console.log(typeof Point); // function
+[/javascript]
+
+However, <code>class</code> can be only invoked with <code>new</code>:
+
+[javascript]
+Point()
+TypeError: Classes can't be function-called
+[/javascript]
+
+Class declaration is not hoisted:
+
+[javascript]
+typeof Foo() // undeclared
+class Foo {/* ... */}
+typeof Foo() // function
+[/javascript]
+
+An example of accessors property:
+
+[javascript]
+class CustomHTMLElement {
+    constructor(elem) {
+        this.elem = elem;
+    }
+
+    get html() {
+        return this.elem.innerHTML;
+    }
+
+    set html(content) {
+        this.elem.innerHTML = content;
+    }
+}
+
+let customElement = class CustomHTMLElement('The custom elem);
+let descriptor = Object.getOwnPropertyDescriptor(CustomHTMLElement.prototype, 'html');
+
+console.log('get' in descriptor); //true
+console.log('set' in descriptor); //true
+[/javascript]
+
+Creating class with static method via <code>static</code>:
+
+[javascript]
+class PersonClass {
+
+    // equivalent of the PersonClass constructor
+    constructor(name) {
+        this.name = name;
+    }
+
+    // equivalent of PersonClass.prototype.sayName
+    sayName() {
+        console.log(this.name);
+    }
+
+    // equivalent of PersonClass.create
+    static create(name) {
+        return new PersonClass(name);
+    }
+}
+
+let person = PersonClass.create("Nicholas"); // call 'create()' without creating an constructor
+[/javascript]
+
+
+An example of creating singleton by IIFE the class constructor:
+
+[javascript]
+let person = new class {
+    constructor(name) {
+        this.name = name;
+    }
+
+    sayName() {
+        console.log(this.name);
+    }
+}('PersonName');
+
+person.sayName(); // PersonName
+[/javascript]
+
 
 
 
