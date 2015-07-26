@@ -5,7 +5,7 @@
 </div>
 
 <ul style="list-style: none;">
-    <li><a class="link-icon" href="/TODO/#Basic usage"></a>Basic usage</li>
+    <li><a class="link-icon" href="/TODO/#Basic usage, start, pause, resume"></a>Basic usage, start, pause, resume</li>
     <li><a class="link-icon" href="/TODO/#Sending message in and out"></a>Sending message in and out</li>
     <li><a class="link-icon" href="/TODO/#Compositions of generators (Delegation)"></a>Compositions of generators (Delegation), yield *</li>
     <li><a class="link-icon" href="/TODO/#Going async with generators"></a>Going async with generators</li>
@@ -14,9 +14,9 @@
 
 <!--more-->
 
-<a href name="Basic usage"></a>
+<a href name="Basic usage, start, pause, resume"></a>
 <div class="title-block">
-    Basic usage
+    Basic usage, start, pause, resume
 </div>
 
 [javascript]
@@ -134,6 +134,8 @@ console.log(it2.next('The V')); //{value: undefined, done: true}
 Another trick that <code>yield*</code> can receive a <code>return</code>ed value from delegated generator:
 
 [javascript]
+'use strict';
+
 function* foo(param) {
   yield 2;
   return 'String from delegeted generator';
@@ -164,20 +166,59 @@ The main principle:
 
 <ol>
     <li>generator <code>yield</code> promises</li>
-    <li>helper function which do a dirty work and returns a result from promise when it is <code>fullfiled</code></li>
+    <li>helper function which does a dirty work and returns a result from promise when it's <code>fulfilled</code> or <code>rejected</code></li>
 </ol>
 
-The helper function in recursively style:
+The helper function in:
 
 [javascript]
-function runGenerator(generator, yieldValue) {
+'use strict';
 
+function runner(gen, val) {
+  let promise;
+  let result = gen.next(val);
+  if (!result.done) {
+    promise = result.value;
+    promise.then(function(promiseVal) {
+      runner(gen, promiseVal);
+    }, function(err) {
+      gen.throw(err);
+    })
+  }
 }
+
+function* foo() {
+
+  let asyncVal1 = new Promise(function(resolve) {
+    setTimeout(function() {
+      resolve(1);
+    }, 2000)
+  })
+  let asyncVal1 =  new Promise(function(resolve) {
+    setTimeout(function() {
+      resolve(2);
+    }, 2000)
+  })
+
+  console.log(asyncVal1 + asyncVal1);
+}
+
+runner(foo()); // 3
 [/javascript]
 
+<a href name="'CO' Library"></a>
+<div class="title-block">
+    'CO' Library
+</div>
 
+The yieldable objects in <code>v4.</code> supported are:
 
-
+promises
+thunks (functions)
+array (parallel execution)
+objects (parallel execution)
+generators (delegation)
+generator functions (delegation)
 
 
 
