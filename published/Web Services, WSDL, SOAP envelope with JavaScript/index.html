@@ -1,0 +1,207 @@
+The main concept of Web Services is to exchange data between two devices using standardized protocols and messages.
+
+<ul style="list-style: none;">
+	<li><a class="link-icon" href="/soap-with-javascript/#What is Web Service and WSDL?"></a>What is Web Service and WSDL?</li>
+	<li><a class="link-icon" href="/soap-with-javascript/#SOAP protocol"></a>SOAP protocol</li>
+	<li><a class="link-icon" href="/soap-with-javascript/#Example of SOAP envelope"></a>Example of SOAP envelope</li>
+	<li><a class="link-icon" href="/soap-with-javascript/#Create/receive SOAP request/response. $soap, $xml, $get Helpers"></a>Create/receive SOAP request/response. $soap, $xml, $get Helpers</code></li>
+</ul>
+
+<!--more-->
+
+<a href="" name="What is Web Service and WSDL?"></a>
+<div class="title-block">
+	<i class="attention"></i>What is Web Service and WSDL?
+</div>
+The <code>W3C</code> defines a Web services: a software system designed to support machine-to-machine interaction over network. It has an interface described in a machine-processable format (specifically WSDL). Other systems interact with the Web service in a manner prescribed by its description using SOAP messages, REST, or using HTTP with an XML serialization in with other Web-related standards</blockquote>
+And for little clear about WSDL (Web Services Description Language) - describes services as collection of network endpoints or ports in XML format.
+
+Exchange messages usually accomplished by protocol <code>HTTP</code>. However, it should be noted that it is still used, but very rarely, protocol - <code>SMTP</code> (Simple Mail Transfer Protocol).
+
+<a href="" name="SOAP protocol"></a>
+<div class="title-block">
+	<i class="attention"></i>SOAP protocol
+</div>
+
+Protocol <code>SOAP</code> transfers messages or small amount of information. <code>SOAP</code> messages formatted in <code>XML</code> and are typically send using <code>HTTP</code>. Some time ago <code>SOAP</code> was spelled as Simply Object Access Protocol. But time passed and everybody saws that protocol isn't simple and nothingness in common with access to objects. And from SOAP v1.2 it is just a SOAP and nothing else.
+
+<div class="wp-center">
+[caption id="" align="aligncenter" width="600"]<img src="http://savemyday.in/source/images/soaps.jpg" alt="" width="1040"/> SOAP it's just a soap[/caption]
+</div>
+
+<a href="" name="Example of SOAP envelope"></a>
+<div class="title-block">
+	<i class="attention"></i>Example of SOAP envelope
+</div>
+
+</code>The SOAP message has 3 parts</code> : envelope, head, body. Body contains all <code>response/request</code> data. Also can say that head isn't required and in modern apps doesn't used.
+<div class="wp-center">
+
+[caption id="" align="aligncenter" width="250"]<img src="http://savemyday.in/source/images/soap_message.gif" alt="" width="250" /> SOAP Envelope[/caption]
+
+</div>
+Example of SOAP XML:
+
+[xml]
+<?xml version="1.0" encoding="utf-8" ?>
+<soapenv:Envelope
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:xsd="http://www.w3.org/2001/XMLSchema"
+	xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/"
+	xmlns:urn="urn:WebservicesName">
+	<soapenv:Header/>
+	<soapenv:Body>
+		<urn:ProductService.getProductByHash
+			soapenv:encodingStyle="http://schemas.xmlsoap.org/soap/encoding/">
+			<return xsi:type="getProductByHash ">
+				<product_hash xsi:type="xsd:string">product hash here!</product_hash>
+			</return>
+		</urn:ProductService.getProductByHash>
+	</soapenv:Body>
+</soapenv:Envelope>
+[/xml]
+
+What here have happened? In the beginning I created SOAP envelope, which call <code>service</code> with URN (Uniform Resource Name). Then calling <code>method</code> getProductByHash. SOAP <code>response</code> of web-service have next view, only body tag:
+
+[xml]
+<soapenv:Body>
+	<urn:ProductService.getProductByHash
+		soapenv:encodingStyle="http://schemas.xmlsoap.org/soap/encoding/">
+		<return xsi:type="getProductByHash ">
+			<product_id xsi:type="xsd:string">260891</emag_id>
+		</return>
+	</urn:ProductService.getProductByHash>
+</soapenv:Body>
+[/xml]
+
+<a href="" name="Create/receive SOAP request/response. $soap, $xml, $get Helpers"></a>
+<div class="title-block">
+	<i class="attention"></i>Create/receive SOAP request/response. $soap, $xml, $get Helpers
+</div>
+
+<code>$soap</code> helper module:
+
+[javascript]
+/**
+ * [main module]
+ * @return {[object]} [with methods: createRequest, createField, getResponseNode
+ * getErrorNode, getFieldValue]
+ */
+var $soap = function() {
+    function getWrappedRequest(pURN, pBody, pHead) {
+        var vWR = {
+            "soapenv:Envelope": {
+                "#attributes": {
+                    "xmlns:xsi": "http://www.w3.org/2001/XMLSchema-instance",
+                    "xmlns:xsd": "http://www.w3.org/2001/XMLSchema",
+                    "xmlns:soapenv": "http://schemas.xmlsoap.org/soap/envelope/",
+                    "xmlns:urn": pURN
+                },
+                "soapenv:Header": {},
+                "soapenv:Body": {}
+            }
+        };
+
+        if (pHead)
+            vWR["soapenv:Envelope"]["soapenv:Header"] = pHead;
+        if (pBody)
+            vWR["soapenv:Envelope"]["soapenv:Body"] = pBody;
+
+        return vWR;
+    }
+
+    function getNode(pNS, pData, pType) {
+        return pData["SOAP-ENV:Envelope"]["SOAP-ENV:Body"]["ns1:Webservices" + pNS + "." + pType + "Response"]["return"];
+    }
+
+    return {
+        /**
+         * [request with xml attributes]
+         * @param {[string]} pURN [name of webservice]
+         * @param {[strting]} pName [method]
+         * @param {[object]} pExt [body data to server]
+         * @return {[object]} [JavaScript soap envelope]
+         */
+        createRequest: function(pURN, pName, pExt) {
+            var vSR = {},
+                vSRT = (vSR[pURN + "." + pName] = {
+                    "#attributes": {
+                        "soapenv:encodingStyle": "http://schemas.xmlsoap.org/soap/encoding/"
+                    },
+                    "return": {
+                        "#attributes": {
+                            "xsi:type": pName + 'Request'
+                        }
+                    }
+                });
+
+            if (pExt)
+                for (var vPrt in pExt)
+                    vSRT["return"][vPrt] = pExt[vPrt];
+
+            var vRes = getWrappedRequest(pURN, vSR);
+            return vRes;
+        },
+        /**
+         * [create soap field]
+         * @param {[string]} pType [type of field]
+         * @param {[string/number]} pValue [name of value]
+         * @return {[type]} [description]
+         */
+        createField: function(pType, pValue) {
+            var vRes = {
+                "#attributes": {
+                    "xsi:type": "xsd:" + pType
+                },
+                "#text": pValue
+            };
+            return vRes;
+        },
+
+        getResponseNode: function(pNS, pData, pType) {
+            return getNode(pNS, pData, pType)["response"];
+        },
+
+        getErrorNode: function(pNS, pData, pType) {
+            return getNode(pNS, pData, pType)["error"];
+        },
+
+        getFieldValue: function(pData, pName) {
+            return pName ? pData[pName]["#text"] : pData["#text"];
+        }
+    };
+}();
+[/javascript]
+
+Example <code>SOAP request</code> as JavasSript object:
+
+[javascript]
+var vRequestObj = $soap.createRequest('urn:Webservices' + 'PortalEmags', 'getEmagIdByHash',
+	{
+		"pdf_hash" : $soap.createField("string", "717fb24cc33821afb4bcd529696cdfce"),
+		"userid_hash" : $soap.createField("string", "65a47daeabcb54e4ecc3923aecdab697")
+	});
+[/javascript]
+<div class="wp-center">
+
+[caption id="" align="aligncenter" width="568"]<img src="http://savemyday.in/source/images/soap_object_log.png" alt="" width="568" height="474" /> log of SOAP responce with specific field[/caption]
+</div>
+
+<hr />
+
+Once I have obtained object with property which I need to use for create XML SOAP Request. It's time to use <code>$xml</code> helper with whole bunch of useful methods :
+
+[javascript]
+
+[/javascript]
+
+Creating XHR object, 2 callbacks, and send request via POST. Parse XML into JSON object -> fetch response property -> get value:
+
+[javascript]
+
+[/javascript]
+
+And, finally response data in Chrome console:
+
+<div class="wp-center">
+[caption id="" align="aligncenter" width="799"]<img src="http://savemyday.in/source/images/soap_log.png" alt="" width="799" height="46" /> log of SOAP responce with specific field[/caption]</div>
