@@ -36,7 +36,7 @@ $get('http://api.portal.emagstudio.com/API/mobileAPI.php?t=WebservicesPortalEmag
 function $get(url, success, error, params, isXML, method) {
     var xhr = new XMLHttpRequest();
     xhr.onreadystatechange = function() {
-        if (xhr.readyState != 4) return;
+        if (xhr.readyState !== 4) return;
         if (xhr.status >= 200 && xhr.status < 300 || xhr.status === 304 || xhr.status === 0) {
             if (success) success(xhr['response' + (isXML ? 'XML' : 'Text')]);
         } else {
