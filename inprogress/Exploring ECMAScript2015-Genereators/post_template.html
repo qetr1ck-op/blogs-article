@@ -213,12 +213,48 @@ runner(foo()); // 3
 
 The yieldable objects in <code>v4.</code> supported are:
 
-promises
-thunks (functions)
-array (parallel execution)
-objects (parallel execution)
-generators (delegation)
-generator functions (delegation)
+<ul>
+    <li>promises</li>
+    <li>generators (delegation)</li>
+    <li>generator functions (delegation)</li>
+    <li>thunks (functions)</li>
+    <li>array (parallel execution)</li>
+    <li>objects (parallel execution)</li>
+</ul>
+
+[javascript]
+co(function*() {
+  result = yield function*() { // генератор
+    return 1;
+  }();
+
+  result = yield function*() { // функция-генератор
+    return 2;
+  };
+
+  result = yield Promise.resolve(3); // промис
+
+  result = yield function(callback) { // function(callback)
+    setTimeout(() => callback(null, 4), 1000);
+  };
+
+
+  result = yield { // две задачи выполнит параллельно, как Promise.all
+    one: Promise.resolve(1),
+    two: function*() { return 2; }
+  };
+
+  result = yield [ // две задачи выполнит параллельно, как Promise.all
+    Promise.resolve(1),
+    function*() { return 2 }
+  ];
+
+});
+[/javascript]
+
+
+
+
 
 
 
@@ -226,7 +262,8 @@ generator functions (delegation)
 
 Article which saves my day:
 <ul>
-    <li>on <a href="http://TODO">TODO</a></li>
+    <li>on <a href="http://davidwalsh.name/concurrent-generators">davidwalsh.name</a></li>
+    <li>on <a href="https://learn.javascript.ru/generator">learn.javascript.ru</a></li>
 </ul>
 
 

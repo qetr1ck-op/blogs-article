@@ -1,0 +1,39 @@
+<div class="wp-center">
+[caption id="" align="aligncenter" width="300"]<img src="http://savemyday.in/source/images/git-github.png" alt="Git and GitHub" width="300"/>Git and GitHub[/caption]
+</div>
+
+<!--more-->
+
+<a href name="Git and GiHub"></a>
+<div class="title-block">
+	<i class="attention"></i>Git and GiHub
+</div>
+
+So <code>Git and GitHub</code> are parts of one complex system, witch complement each other:
+<ul>
+	<li>
+	Git is a version control system. Git is the name of <code>VCS</code> version control system wrote by <a href="http://en.wikipedia.org/wiki/Linus_Torvalds" title="Linus Torvalds">Linus Torvalds</a>. There are always series of <code>commits</code>(snapshots). You see a path of this snapshots, in which order they were created. You create <code>branch</code> and use snapshot for <code>revert</code> changes.
+	</li>
+	<li>
+	GitHub is website on which you can publish your Git repositories and collaborate with other people.
+	</li>
+</ul>
+
+<a href name="What is better, Subversion or Git?"></a>
+<div class="title-block">
+	<i class="attention"></i>What to choose, Subversion or Git?
+</div>
+
+Git is not better than Subversion. But is also not worst. It's different:
+
+<ul>
+	<li>The key difference is that it's a <code>decentralized</code>. With Git you can do practically anything off-line, cause everyone has their own repository. For example:  I have a server at home and a Laptop on the road, and SVN simply doesn't work well here. With SVN, I can't have local source control if I'm not connected to the repository (Yes, I know about SVK or about ways to copy the repo). With Git, that's the default mode anyway. It's an extra command though (<code>git commit</code> commits locally, whereas <code>git push origin master</code> pushes the master branch to the remote branch named "origin").</li>
+	<li>Making <code>branches</code> and <code>merging</code> between branches is really easy.Even if you don't have commit rights for a project, you can still have your own repository on-line, and publish "push requests" for your changes. Everybody who likes your changes can pull them into their project, including the official maintainers. It's trivial to fork a project, modify it, and still keep merging in the bugfixes from the HEAD branch.
+	</li>
+	<li>Git is perfectly suited for Open Source projects: just fork it, commit your changes to your own Fork, and then ask the original project maintainer to pull your changes. With Git, this just works. Really, try it on <code>Github</code>, it's magic.</li>
+	<li>Git adds <code>complexity</code>. Two modes of creating repositories, checkout vs. clone, commit vs. push... You have to know which commands work locally and which work with "the server" (I'm assuming most people still like a central "master-repository").</li>
+</ul>
+
+Make my day:
+<a href="http://stackoverflow.com/questions/11816424/understanding-the-basics-of-git-and-github" title="stackoverflow">understanding-the-basics-of-git-and-github</a>
+<a href="http://stackoverflow.com/questions/871/why-is-git-better-than-subversion">Discussion on StackOverflow</a>
