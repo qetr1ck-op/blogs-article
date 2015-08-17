@@ -1,0 +1,85 @@
+Two-column layout allows effective use browser space. Layout doesn't require hard work and it can used with combining colomn in pixels or percentage. For example two-column layout are in <a href="http://habrahabr.com" title="Two column layout on habrahabr.com">habrahabr.ru</a>:
+
+<div class="wp-center">
+[caption id="" align="aligncenter" width="200"]<img alt="" src="../source/images/two-column-layout.png" width="500" />Liquid Two-column layout[/caption]
+</div>
+<!--more-->
+
+There are several approach for formation such layout, but the quickest and easiest is compine <code>margin</code> and <code>float</code>.
+
+
+<div class="title-block">
+  <i class="attention"></i><code>For left</code> side bar with static width:
+</div>
+
+<table style="width: 450px; margin: 0 auto">
+  <tbody>
+  <tr>
+    <th colspan="2">For left layer with width 20%</th>
+  </tr>
+  <tr>
+    <td style="width: 50%">Left column</td>
+    <td>Right column</td>
+  </tr>
+  <tr>
+    <td>float: left
+        width: 20%</td>
+    <td>margin-left: 21%</td>
+  </tr>
+  <tr>
+    <th colspan="2">For left layer with width 200px</th>
+  </tr>
+  <tr>
+    <td>float: left
+        width: 200px</td>
+    <td>margin-left: 210px</td>
+  </tr>
+</tbody>
+</table>
+
+<br>
+
+<div class="title-block">
+  <i class="attention"></i><code>For right</code> side bar:
+</div>
+
+<table style="width: 450px; margin: 0 auto">
+  <tbody>
+  <tr>
+    <th colspan="2">For right layer with width 20%</th>
+  </tr>
+  <tr>
+    <td style="width: 50%">Left column</td>
+    <td>Right column</td>
+  </tr>
+  <tr>
+    <td>margin-right: 21%</td>
+    <td>float: right
+        width: 20%</td>
+  </tr>
+  <tr>
+    <th colspan="2" >For right layer with width 200px</th>
+  </tr>
+  <tr>
+    <td>float: right
+        width: 200px</td>
+    <td>margin-right: 210px</td>
+  </tr>
+</tbody>
+</table>
+
+<br>
+
+<p data-height="400" data-theme-id="0" data-slug-hash="oAtih" data-default-tab="result" class='codepen'>See the Pen <a href='http://codepen.io/qetr1ck-op/pen/oAtih/'>oAtih</a> by qetr1ck-op (<a href='http://codepen.io/qetr1ck-op'>@qetr1ck-op</a>) on <a href='http://codepen.io'>CodePen</a>.</p>
+<script async src="//codepen.io/assets/embed/ei.js"></script>
+
+<div class="title-block">
+  <i class="attention"></i>With <code>display: flex</code>
+</div>
+
+<p data-height="508" data-theme-id="10606" data-slug-hash="MwdvEV" data-default-tab="result" data-user="qetr1ck-op" class='codepen'>See the Pen <a href='http://codepen.io/qetr1ck-op/pen/MwdvEV/'>Two-column layout with Flexbox</a> by qetr1ck-op (<a href='http://codepen.io/qetr1ck-op'>@qetr1ck-op</a>) on <a href='http://codepen.io'>CodePen</a>.</p>
+<script async src="//assets.codepen.io/assets/embed/ei.js"></script>
+
+Make my day:
+<a href="http://htmlbook.ru/samlayout/tipovye-makety/rezinovyi-dvukhkolonochnyi-maket" title="fluid 2 column layout on htmlbook.ru">fluid 2 column layout</a>
+<a href="http://www.inserthtml.com/demos/css/radio-buttons/" title="awesome checkboxes on www.inserthtml.com">awesome checkboxes</a>
