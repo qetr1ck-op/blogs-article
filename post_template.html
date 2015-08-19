@@ -18,7 +18,7 @@ TOP 10 mistakes when you develop on AngularJS
 
 <a href name="TODO"></a>
 <div class="title-block">
-    Folder structure which related to MVC components
+    1. Folder structure which related to MVC components
 </div>
 
 When you work with MVC / MVW frameworks it's convenience to structure code by <code>MVC components</code> using the following template:
@@ -64,11 +64,90 @@ app/
 The structure allows more faster search for files which are related to the same feature. It may puzzled at the beginning to share js with html or even with test files. But it saves a lot of time, because it's more natural.
 
 
-<code>TODO</code>
+<a href name="TODO"></a>
+<div class="title-block">
+     2. Modules (or lack of them)
+</div>
+
+At the beginning of development all functionalities include in a single module. But manage a such type of code is inconvenient:
 
 [javascript]
+'use strict';
+let app = angular.module('app',[]);
+app.service('MyService', function(){
+    //service code
+});
 
+app.controller('MyCtrl', function($scope, MyService){
+    //controller code
+});
 [/javascript]
+
+The next most common approach is grouping objects by type:
+
+[javascript]
+'use strict';
+let services = angular.module('services',[]);
+services.service('MyService', function(){
+    //service code
+});
+
+let controllers = angular.module('controllers', ['services']);
+controllers.controller('MyCtrl', function($scope, MyService){
+    //controller code
+});
+
+let app = angular.module('app', ['controllers', 'services']);
+[/javascript]
+
+For better scalability and future re-usability - split code by feature:
+
+[javascript]
+'use strict';
+let sharedServicesModule = angular.module('sharedServices',[]);
+sharedServices.service('NetworkService', function($http){});
+
+let loginModule = angular.module('login', ['sharedServices']);
+loginModule.service('loginService', function(NetworkService){});
+loginModule.controller('loginCtrl', function($scope, loginService){});
+
+let app = angular.module('app', ['sharedServices', 'login']);
+[/javascript]
+
+<a href name="TODO"></a>
+<div class="title-block">
+    3. Dependency Injection
+</div>
+
+Pattern DI in AngularJS uses out of box. DI helps to keep code clean and helps with testing process.
+
+[javascript]
+'use strict';
+app = angular.module('app',[]);
+app.controller('MainCtrl', function($scope, $timeout) { //MainCtrl has dependency on $scope and $timeout
+    $timeout(function(){
+        console.log($scope);
+    }, );
+});
+[/javascript]
+
+And code after minification:
+
+[javascript]
+let app=angular.module("app",[]);app.controller("MainCtrl",function(e,t){t(function(){console.log(e)})})
+[/javascript]
+
+Now AngularJS can't resolve minificated variables. Easiest solution is:
+
+[javascript]
+app.controller('MainCtrl', ['$scope', '$timeout', function($scope, $timeout){
+    $timeout(function(){
+        console.log($scope);
+    }, );
+}]);
+[/javascript]
+
+Another way to handle DI with minification is <a href="https://github.com/olov/ng-annotate">ng-annotate</a> module. More information on official <a href="https://docs.angularjs.org/tutorial/step_05#a-note-on-minification">AngularJS docs</a>
 
 Article which saves my day:
 <ul>
