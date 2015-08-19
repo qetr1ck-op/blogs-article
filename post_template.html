@@ -1,3 +1,5 @@
+TOP 10 mistakes when you develop on AngularJS
+
 <div class="wp-center">
     <a href="TODO">
         <img src="../source/images/TODO.png" alt="" width="TODOpx"/>
@@ -16,8 +18,51 @@
 
 <a href name="TODO"></a>
 <div class="title-block">
-    Browser support and polyfill
+    Folder structure which related to MVC components
 </div>
+
+When you work with MVC / MVW frameworks it's convenience to structure code by <code>MVC components</code> using the following template:
+
+<bash>
+templates/
+    _login.html
+    _feed.html
+app/
+    app.js
+    controllers/
+        LoginController.js
+        FeedController.js
+    directives/
+        FeedEntryDirective.js
+    services/
+        LoginService.js
+        FeedService.js
+    filters/
+        CapatalizeFilter.js
+</bash>
+
+But when project will rise it's hard to use such structure of folders. You always need to open a few folder at the same time. It isn't depend what IDE or tool you use (Sublime, VS, Vim with NerdTree) - it's uncomfortable.
+
+To avoid this this developers often use grouping be <code>functionality type</code>:
+
+<bash>
+app/
+    app.js
+    Feed/
+        _feed.html
+        FeedController.js
+        FeedEntryDirective.js
+        FeedService.js
+    Login/
+        _login.html
+        LoginController.js
+        LoginService.js
+    Shared/
+        CapatalizeFilter.js
+</bash>
+
+The structure allows more faster search for files which are related to the same feature. It may puzzled at the beginning to share js with html or even with test files. But it saves a lot of time, because it's more natural.
+
 
 <code>TODO</code>
 
