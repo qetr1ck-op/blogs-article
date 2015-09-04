@@ -2,18 +2,17 @@ In Web world, fluid layout with 3 column is the most flexible and customizable l
 
 <div class="wp-center">
 [caption width="469" align="aligncenter"]
-<img src="http://htmlbook.ru/files/images/layout2/5-17.png" width="469" height="338" alt="fluid three column layout" class />Fluid three column layout
+<img src="http://savemyday.in/source/images/Fluid three column layout with positioning, floats, tables or flexbox/image.png" width="469" height="338" alt="fluid three column layout" class />Fluid three column layout
 [/caption]
 </div>
 
 There are a severeal ways to achive such structure:
 
-<!-- TODO: navs -->
-<ul>
-	<li>positioning</li>
-	<li>floating elements</li>
-	<li>teble columns</li>
-	<li>flexbox</li>
+<ul style="list-style: none;">
+    <li><a class="link-icon" href="http://savemyday.in/fluid-three-column-layout/#positioning"></a>positioning</li>
+    <li><a class="link-icon" href="http://savemyday.in/fluid-three-column-layout/#floating elements"></a>floating elements</li>
+    <li><a class="link-icon" href="http://savemyday.in/fluid-three-column-layout/#table columns"></a>table columns</li>
+    <li><a class="link-icon" href="http://savemyday.in/fluid-three-column-layout/#flexbox"></a>flexbox</li>
 </ul>
 
 <!--more-->
@@ -24,50 +23,55 @@ There are a severeal ways to achive such structure:
 	<li><code>∞</code> - column occupies all remain width space.</li>
 </ul>
 
-<blockquote>Using positioning</blockquote>
-<a href name="Git and GiHub"></a>
+<a href name="positioning"></a>
 <div class="title-block">
-	<i class="attention"></i>Using positioning
+    Using positioning
 </div>
-<hr>
-To control position layout relative to the parent element layers, necessary establish for parent property - <b><code>position: relative</code></b>. And for child element set <b><code>position: absolute</code></b>, conrols fluid element with <b><code>right/left</b></code>, width in some cases used <b><code>margin-right/left</b></code>.
 
-<p data-height="268" data-theme-id="0" data-slug-hash="jtyhi" data-default-tab="result" class='codepen'>See the Pen <a href='http://codepen.io/qetr1ck-op/pen/jtyhi/'>Three column fluid layout with positionig</a> by qetr1ck-op (<a href='http://codepen.io/qetr1ck-op'>@qetr1ck-op</a>) on <a href='http://codepen.io'>CodePen</a>.</p>
+To control position layout relative to the parent element layers, necessary establish for parent property - <code>position: relative</code>. And for child element set <code>position: absolute</code>, conrols fluid element with <code>right/left</code>, width in some cases used <code>margin-right/left</code>.
+
+<p data-height="1082" data-theme-id="0" data-slug-hash="jtyhi" data-default-tab="result" class='codepen'>See the Pen <a href='http://codepen.io/qetr1ck-op/pen/jtyhi/'>Three column fluid layout with positionig</a> by qetr1ck-op (<a href='http://codepen.io/qetr1ck-op'>@qetr1ck-op</a>) on <a href='http://codepen.io'>CodePen</a>.</p>
 <script async src="//codepen.io/assets/embed/ei.js"></script>
 
-<blockquote>Floating elements:</blockquote>
-<hr>
+<a href name="floating"></a>
+<div class="title-block">
+    Floats
+</div>
 
-For this approach I used <b><code>float</code></b> in combinatition with properties <b><code>margin</code></b> and <b><code>width</code></b>. In some case used nested or additional <b><code>div.wrap</code></b>, because we can't use in the same time for onу HTML element margin in px and %.
+For this approach I used <code>float</code> in combinatition with properties <code>margin</code> and <code>width</code>. In some case used nested or additional <code>div.wrap</code>, because we can't use in the same time for onу HTML element margin in px and %.
 
-<p data-height="268" data-theme-id="0" data-slug-hash="asfKq" data-default-tab="result" class='codepen'>See the Pen <a href='http://codepen.io/qetr1ck-op/pen/asfKq/'>Fluid three column layout using floats</a> by qetr1ck-op (<a href='http://codepen.io/qetr1ck-op'>@qetr1ck-op</a>) on <a href='http://codepen.io'>CodePen</a>.</p>
+<p data-height="1082" data-theme-id="0" data-slug-hash="asfKq" data-default-tab="result" class='codepen'>See the Pen <a href='http://codepen.io/qetr1ck-op/pen/asfKq/'>Fluid three column layout using floats</a> by qetr1ck-op (<a href='http://codepen.io/qetr1ck-op'>@qetr1ck-op</a>) on <a href='http://codepen.io'>CodePen</a>.</p>
 <script async src="//codepen.io/assets/embed/ei.js"></script>
 
-
-<blockquote>Table columns:</blockquote>
-<hr>
+<a href name="table columns"></a>
+<div class="title-block">
+    Table columns
+</div>
 
 Actually, it's convinient to use table when you want to create column with same height. Width of column calculated automatcaly based on their content so I just need to specify the require width. Remain columns would streach to avaible width of table.
 
-<p data-height="268" data-theme-id="0" data-slug-hash="olGHE" data-default-tab="result" class='codepen'>See the Pen <a href='http://codepen.io/qetr1ck-op/pen/olGHE/'>Fluid three column layout using table</a> by qetr1ck-op (<a href='http://codepen.io/qetr1ck-op'>@qetr1ck-op</a>) on <a href='http://codepen.io'>CodePen</a>.</p>
+<p data-height="1082" data-theme-id="0" data-slug-hash="olGHE" data-default-tab="result" class='codepen'>See the Pen <a href='http://codepen.io/qetr1ck-op/pen/olGHE/'>Fluid three column layout using table</a> by qetr1ck-op (<a href='http://codepen.io/qetr1ck-op'>@qetr1ck-op</a>) on <a href='http://codepen.io'>CodePen</a>.</p>
 <script async src="//codepen.io/assets/embed/ei.js"></script>
 
-<blockquote>Flex box:</blockquote>
-<hr>
+<a href name="flexbox"></a>
+<div class="title-block">
+    Flex box
+</div>
 
-Most layout or if you want grid system use one of next methods: <b><code>positioning</b></code>, <b><code>tables</b></code>, and most popular - <b><code>inline-blocks</b></code> or <b><code>float</b></code>. All this methods have pretty significaте problems and limetations.
+Most layout or if you want grid system use one of next methods: <code>positioning</code>, <code>tables</code>, and most popular - <code>inline-blocks</code> or <code>float</code>. All this methods have pretty significaте problems and limetations.
 
-For for achive bunch of three column layout Flex boxes are super ease. In generaly I used for parents : <b><code>display: flex</b></code> and for children <b><code>flex: 1</b></code> it's shorthand for <b><code>flex-grow, flex-shrink and flex-basis</b></code>
+For for achive bunch of three column layout Flex boxes are super ease. In generaly I used for parents : <code>display: flex</code> and for children <code>flex: 1</code> it's shorthand for <code>flex-grow, flex-shrink and flex-basis</code>
 
-In furture post I should discover this literally one of the most promosing feature of Web disign.
+In furture post I should discover this literally one of the most promosing feature of web disign.
 
-<p data-height="268" data-theme-id="0" data-slug-hash="uAfrh" data-default-tab="result" class='codepen'>See the Pen <a href='http://codepen.io/qetr1ck-op/pen/uAfrh/'>Fluid three column layout with flexbox</a> by qetr1ck-op (<a href='http://codepen.io/qetr1ck-op'>@qetr1ck-op</a>) on <a href='http://codepen.io'>CodePen</a>.</p>
+<p data-height="1082" data-theme-id="0" data-slug-hash="uAfrh" data-default-tab="result" class='codepen'>See the Pen <a href='http://codepen.io/qetr1ck-op/pen/uAfrh/'>Fluid three column layout with flexbox</a> by qetr1ck-op (<a href='http://codepen.io/qetr1ck-op'>@qetr1ck-op</a>) on <a href='http://codepen.io'>CodePen</a>.</p>
 <script async src="//codepen.io/assets/embed/ei.js"></script>
 
 <hr>
 
-This resources Save My Dat:
+This resources Save My Day:
 <ul>
 	<li><a href="http://htmlbook.ru/samlayout/tipovye-makety/rezinovyi-trekhkolonochnyi-maket">htmlbook.ru</a></li>
 	<li><a href="http://css-tricks.com/snippets/css/a-guide-to-flexbox/">css-tricks.com</a></li>
 	<li><a href="http://philipwalton.github.io/solved-by-flexbox/demos/grids/">Solved by Flexbox</a></li>
+</ul>
