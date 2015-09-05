@@ -1,0 +1,43 @@
+<div class="wp-center">
+<img src="http://savemyday.in/source/images/web_server.jpg" alt="" width="400"/>
+</div>
+
+<!--more-->
+
+Why do you need web server?
+
+First of all, in a simple term, to answer any your queries/requests made by user through the web. Hence, the name Web Server.
+
+A <code>Web Server</code> is an application which is made available to listen to any request. A Server has the information. A Client is anyone who is in need of an information. When want, you make a request through the WWW ( World Wide Web (abbreviated as WWW or W3, commonly known as the <code>web</code>) which is predominantly through <a href="http://savemyday.in/https-and-http-difference/" title="HTTPS and HTTP difference">HTTP or HTTPS</a>. HTTP Stands for Hyper Text Transfer Protocol which defines the set of rules to be followed during the transcation over web.
+
+In an Web or Enterprise Application perspective, you need a webserver as a first entry point since all the requests have to be originated from a single place.
+
+Say, your login page to the application. But processing the login operation may not be the job of a Web Server and it would be done by a Web Application. As such, a Web Server is preferred to serve any static files, which is not changing in nature for any type of requests. Whereas, you need a Web application to produce a dynamic response according to the type of inputs you provide along with your request. In this scenario, to regulate all your traffic of requests, you need a single point of control, which is your webserver.
+
+Some time ago for my projects I used pure Apache, and configure appache config it's not a big deal. Than I moved to XAMP/WAMP servises. Thats guys are more friendly with their GUI. But they was heavy for me, for 90% of case I didn't used to DB or PHP.
+
+Than I have heard about simple web server on Python. I instaled it and it was syper easy by CLI. But than I found a Node.js <code>http-server</code> - is a simple, zero-configuration command-line http server. It is powerful enough for production usage, but it's simple and hackable enough to be used for testing, local development, and learning.
+
+Simplest nodejs server is just:
+
+[shell]
+npm install http-server -g
+[/shell]
+
+Now you can run a server via:
+
+[shell]
+http-server
+#OR
+http-server -o --cors
+#which opens your web browser and enables CORS requests.
+[/shell]
+
+For more options run:
+
+[shell]
+http-server --help
+[/shell]
+
+Article which saves my day:
+<a href="https://github.com/nodeapps/http-server" title="http-server">github.com/nodeapps/http-server</a>
