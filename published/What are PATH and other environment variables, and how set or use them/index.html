@@ -56,32 +56,14 @@ Other variables might to tell for example, where the Windows folder is located (
 
 Environment Variables in Windows are denoted with percent signs (%) surrounding the name <code>%name%</code>.
 
-To <b>display</b> environment variable value type <code>echo %name%</code>.
+To <b>display</b> environment variable value type <code>echo %name%</code>:
 
-[bash]
-echo %USERPROFILE%
-C:\Users\Daniel
-[/bash]
+<script src="https://gist.github.com/qetr1ck-op/ac52d61c309701eaeaf2.js"></script>
 
 To <b>create/set</b> a variable permanently, use <code>setx varname=value</code>:
 
-[bash]
-setx FunnyCatPictures=C:\Users\Daniel\Pictures\Funny Cat Pictures
-#OR
-setx FunnyCatPicturesTwo=%USERPROFILE%\Pictures\Funny Cat Pictures 2
-
-#Restart CMD
-echo %FunnyCatPictures%
-C:\Users\Daniel\Pictures\Funny Cat Pictures
-[/bash]
+<script src="https://gist.github.com/qetr1ck-op/72ec25e9ba08f904e2d6.js"></script>
 
 To <b>append/add</b> a variable, use <code>setx varname=value;%varname%</code>:
 
-[bash]
-setx Penguins=C:\Linux
-
-setx Penguins=C:\Windows;%Penguins%
-
-echo %Penguins%
-C:\Windows;C:\Linux
-[/bash]
+<script src="https://gist.github.com/qetr1ck-op/0de00967b6e14ceaae35.js"></script>
