@@ -1,5 +1,3 @@
-TOP 10 mistakes when you develop on AngularJS
-
 <div class="wp-center">
     <a href="TODO">
         <img src="../source/images/TODO.png" alt="" width="TODOpx"/>
@@ -18,51 +16,20 @@ TOP 10 mistakes when you develop on AngularJS
 
 <a href name="TODO"></a>
 <div class="title-block">
-    1. Folder structure which related to MVC components
+    1. MVC directory structure
 </div>
 
 When you work with MVC / MVW frameworks it's convenience to structure code by <code>MVC components</code> using the following template:
 
-<bash>
-templates/
-    _login.html
-    _feed.html
-app/
-    app.js
-    controllers/
-        LoginController.js
-        FeedController.js
-    directives/
-        FeedEntryDirective.js
-    services/
-        LoginService.js
-        FeedService.js
-    filters/
-        CapatalizeFilter.js
-</bash>
+<script src="https://gist.github.com/qetr1ck-op/24404d318344f4b77595.js"></script>
 
 But when project will rise it's hard to use such structure of folders. You always need to open a few folder at the same time. It isn't depend what IDE or tool you use (Sublime, VS, Vim with NerdTree) - it's uncomfortable.
 
 To avoid this this developers often use grouping be <code>functionality type</code>:
 
-<bash>
-app/
-    app.js
-    Feed/
-        _feed.html
-        FeedController.js
-        FeedEntryDirective.js
-        FeedService.js
-    Login/
-        _login.html
-        LoginController.js
-        LoginService.js
-    Shared/
-        CapatalizeFilter.js
-</bash>
+<script src="https://gist.github.com/qetr1ck-op/9a0e5e9af7eed2f6aef3.js"></script>
 
 The structure allows more faster search for files which are related to the same feature. It may puzzled at the beginning to share js with html or even with test files. But it saves a lot of time, because it's more natural.
-
 
 <a href name="TODO"></a>
 <div class="title-block">
@@ -71,48 +38,15 @@ The structure allows more faster search for files which are related to the same 
 
 At the beginning of development all functionalities include in a single module. But manage a such type of code is inconvenient:
 
-[javascript]
-'use strict';
-let app = angular.module('app',[]);
-app.service('MyService', function(){
-    //service code
-});
-
-app.controller('MyCtrl', function($scope, MyService){
-    //controller code
-});
-[/javascript]
+<script src="https://gist.github.com/qetr1ck-op/f91462f76a1ca37f3232.js"></script>
 
 The next most common approach is grouping objects by type:
 
-[javascript]
-'use strict';
-let services = angular.module('services',[]);
-services.service('MyService', function(){
-    //service code
-});
-
-let controllers = angular.module('controllers', ['services']);
-controllers.controller('MyCtrl', function($scope, MyService){
-    //controller code
-});
-
-let app = angular.module('app', ['controllers', 'services']);
-[/javascript]
+<script src="https://gist.github.com/qetr1ck-op/3912656b35c16c50bce3.js"></script>
 
 For better scalability and future re-usability - split code by feature:
 
-[javascript]
-'use strict';
-let sharedServicesModule = angular.module('sharedServices',[]);
-sharedServices.service('NetworkService', function($http){});
-
-let loginModule = angular.module('login', ['sharedServices']);
-loginModule.service('loginService', function(NetworkService){});
-loginModule.controller('loginCtrl', function($scope, loginService){});
-
-let app = angular.module('app', ['sharedServices', 'login']);
-[/javascript]
+<script src="https://gist.github.com/qetr1ck-op/2b390ced242af620f214.js"></script>
 
 <a href name="TODO"></a>
 <div class="title-block">
@@ -121,33 +55,25 @@ let app = angular.module('app', ['sharedServices', 'login']);
 
 Pattern DI in AngularJS uses out of box. DI helps to keep code clean and helps with testing process.
 
-[javascript]
-'use strict';
-app = angular.module('app',[]);
-app.controller('MainCtrl', function($scope, $timeout) { //MainCtrl has dependency on $scope and $timeout
-    $timeout(function(){
-        console.log($scope);
-    }, );
-});
-[/javascript]
-
-And code after minification:
-
-[javascript]
-let app=angular.module("app",[]);app.controller("MainCtrl",function(e,t){t(function(){console.log(e)})})
-[/javascript]
+<script src="https://gist.github.com/qetr1ck-op/58281552fe5475f79dda.js"></script>
 
 Now AngularJS can't resolve minificated variables. Easiest solution is:
 
-[javascript]
-app.controller('MainCtrl', ['$scope', '$timeout', function($scope, $timeout){
-    $timeout(function(){
-        console.log($scope);
-    }, );
-}]);
-[/javascript]
+<script src="https://gist.github.com/qetr1ck-op/01721016841fc0760acd.js"></script>
 
 Another way to handle DI with minification is <a href="https://github.com/olov/ng-annotate">ng-annotate</a> module. More information on official <a href="https://docs.angularjs.org/tutorial/step_05#a-note-on-minification">AngularJS docs</a>
+
+<a href name="TODO"></a>
+<div class="title-block">
+    3.1. Global Dependencies
+</div>
+
+Often when writing AngularJS apps there will be a dependency on an object that binds itself to the global scope. This means it's available in any AngularJS code, but this breaks the dependency injection model.
+
+AngularJS makes it simple to encapsulate these globals into modules so they can be injected like standard AngularJS modules.
+
+<script src="https://gist.github.com/qetr1ck-op/641f588b6820a1f3de81.js"></script>
+
 
 Article which saves my day:
 <ul>
