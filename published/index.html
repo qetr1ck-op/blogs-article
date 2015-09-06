@@ -1,0 +1,87 @@
+<ul style="list-style: none;">
+    <li><a class="link-icon" href="http://savemyday.in/what-are-path-and-other-environment-variables-and-how-set-or-use-them/#Environment Variables"></a>Environment Variables</li>
+    <li><a class="link-icon" href="http://savemyday.in/what-are-path-and-other-environment-variables-and-how-set-or-use-them/#Path"></a>Path</li>
+    <li><a class="link-icon" href="http://savemyday.in/what-are-path-and-other-environment-variables-and-how-set-or-use-them/#Other"></a>Other</li>
+    <li>Creating new env variable on Windows
+        <ul>
+            <li><a class="link-icon" href="http://savemyday.in/what-are-path-and-other-environment-variables-and-how-set-or-use-them/#Creating new env variable on Windows by GUI"></a>by GUI</li>
+            <li><a class="link-icon" href="http://savemyday.in/what-are-path-and-other-environment-variables-and-how-set-or-use-them/#Creating new env variable on Windows by CLI"></a>by CLI</li>
+        </ul>
+    </li>
+
+
+</ul>
+
+<!--more-->
+
+<a href name="Environment Variables"></a>
+<div class="title-block">
+    Environment Variables
+</div>
+
+Environment variables hold values related to the current environment, like the Operating System or user sessions.
+
+<a href name="Path"></a>
+<div class="title-block">
+    Path
+</div>
+
+One of the best known on Windows, OS X or Linux platforms is <code>PATH</code>. It specifies the directories in which executable programs are located that can be started without typing the whole path to the program file on command line. On Windows <code>cmd</code> (in my case it's a <a href="http://savemyday.in/cmder/">cmder</a>) use <code>Win+R</code>.
+
+<a href name="Other"></a>
+<div class="title-block">
+    Other
+</div>
+
+Other variables might to tell for example, where the Windows folder is located (e.g. <code>%WINDIR%</code> is <code>C:\Windows</code>)
+
+<a href name="Creating new env variable on Windows by GUI"></a>
+<div class="title-block">
+    Creating new env variable on Windows by GUI
+</div>
+
+<ol>
+    <li>Open Control Panel » System » Advanced » Environment Variables.</li>
+    <li>Type control <code>sysdm.cpl,,3</code> in the Run dialog (Win+R) and click Environment Variables.For editing user variables you can also type</li>
+</ol>
+
+<a href="http://savemyday.in/wp-content/uploads/2014/12/subl-environment-variable-1.jpg"><img src="http://savemyday.in/wp-content/uploads/2014/12/subl-environment-variable-1-300x273.jpg" alt="subl-environment-variable-1" width="300" height="273" class="aligncenter size-medium wp-image-842" /></a>
+
+<a href="http://savemyday.in/wp-content/uploads/2014/12/subl-windows-system-path-2.jpg"><img src="http://savemyday.in/wp-content/uploads/2014/12/subl-windows-system-path-2-300x277.jpg" alt="subl-windows-system-path-2" width="300" height="277" class="aligncenter size-medium wp-image-843" /></a>
+
+<a href name="Creating new env variable on Windows by CLI"></a>
+<div class="title-block">
+    Creating new env variable on Windows by CLI
+</div>
+
+Environment Variables in Windows are denoted with percent signs (%) surrounding the name <code>%name%</code>.
+
+To <b>display</b> environment variable value type <code>echo %name%</code>.
+
+[bash]
+echo %USERPROFILE%
+C:\Users\Daniel
+[/bash]
+
+To <b>create/set</b> a variable permanently, use <code>setx varname=value</code>:
+
+[bash]
+setx FunnyCatPictures=C:\Users\Daniel\Pictures\Funny Cat Pictures
+#OR
+setx FunnyCatPicturesTwo=%USERPROFILE%\Pictures\Funny Cat Pictures 2
+
+#Restart CMD
+echo %FunnyCatPictures%
+C:\Users\Daniel\Pictures\Funny Cat Pictures
+[/bash]
+
+To <b>append/add</b> a variable, use <code>setx varname=value;%varname%</code>:
+
+[bash]
+setx Penguins=C:\Linux
+
+setx Penguins=C:\Windows;%Penguins%
+
+echo %Penguins%
+C:\Windows;C:\Linux
+[/bash]
