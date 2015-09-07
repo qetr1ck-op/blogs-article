@@ -74,8 +74,24 @@ AngularJS makes it simple to encapsulate these globals into modules so they can 
 
 <script src="https://gist.github.com/qetr1ck-op/641f588b6820a1f3de81.js"></script>
 
+<a href name="TODO"></a>
+<div class="title-block">
+    4. Fat controllers
+</div>
+
+It's easy, especially when starting out, to put to much logic in the controller. Controller should <b>never</b> do DOM manipulation. That's work for directives! Likewise business logic should live in services.
+
+App data should be also stored and fetched in services, except when we need bound to the <code>$scope</code>. Services are singletons that persist throughout the lifetime of the application, while controllers are transient between application states. If data is stored in the controller then it will need to be fetched from somewhere when it is instantiate.
+
+AngularJS works best when following the Single Responsibility Principle (SRP). If the controller is a coordinator between the view and the model, then the amount of logic it has should be minimal. This will also make testing much simpler.
+
+<a href name="TODO"></a>
+<div class="title-block">
+    4. Fat controllers
+</div>
+
 
 Article which saves my day:
 <ul>
-    <li>on <a href="http://TODO">TODO</a></li>
+    <li>on <a href="https://www.airpair.com/angularjs/posts/top-10-mistakes-angularjs-developers-make">Original post</a></li>
 </ul>
