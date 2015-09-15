@@ -92,13 +92,34 @@ AngularJS works best when following the Single Responsibility Principle (SRP). I
 
 What is service:
 
-<ul>
-    <li>It provides methods to keep data across the lifetime of the angular app</li>
-    <li></li>
-    <li></li>
-    <li></li>
-</ul>
+<ol>
+    <li>It provides methods to keep, share and organize data across the lifetime of the Angular app</li>
+    <li>Lazy loads and singleton object</li>
+</ol>
 
+An Angular service can be created in five different ways:
+
+<ol>
+    <li>service</li>
+    <li>factory</li>
+    <li>provider</li>
+    <li>value</li>
+    <li>constant</li>
+</ol>
+
+The most verbose, but also the most comprehensive one is a Provider recipe. The remaining four recipe types — Value, Factory, Service and Constant — are just syntactic sugar on top of a provider recipe.
+
+Here is a great example by Misko:
+
+<code>
+    provide.value('a', 123);
+    provide.constant('A', 321); //can't modify with a decorator
+
+    function Controller(a, A) {
+        expect(a).toEqual(123);
+        expect(A).toEqual(231);
+    }
+</code>
 
 
 Article which saves my day:
