@@ -107,20 +107,29 @@ An Angular service can be created in five different ways:
     <li>constant</li>
 </ol>
 
-The most verbose, but also the most comprehensive one is a Provider recipe. The remaining four recipe types — Value, Factory, Service and Constant — are just syntactic sugar on top of a provider recipe.
+The most verbose, but also the most comprehensive one is a <code>Provider</code> recipe. The remaining four recipe types — Value, Factory, Service and Constant — are just syntactic sugar on top of a provider recipe.
 
-Here is a great example by Misko:
+Here is a great examples by Misko:
 
-<code>
-    provide.value('a', 123);
-    provide.constant('A', 321); //can't modify with a decorator
+<script src="https://gist.github.com/qetr1ck-op/dc7fb71d2d3f61b4de76.js"></script>
 
-    function Controller(a, A) {
-        expect(a).toEqual(123);
-        expect(A).toEqual(231);
-    }
-</code>
+In this case the injectors simply return the value. But what if you want to compute the value?
 
+<script src="https://gist.github.com/qetr1ck-op/1a02d77c585f4ed31397.js"></script>
+
+So <code>factory</code> is a function which responsible to creating or/and modifying the value. Notice that the the factory function can ask for other <code>dependencies</code>
+
+If you want to be more OO and have a class?
+
+<script src="https://gist.github.com/qetr1ck-op/8ef78320b0af84631e00.js"></script>
+
+But if we want to configure function <code>before injection</code>?
+
+<script src="https://gist.github.com/qetr1ck-op/e98dbc733fb7be97877b.js"></script>
+
+As a side <code>note</code>, <code>service</code>, <code>factory</code>, and value are all derived from provider:
+
+<script src="https://gist.github.com/qetr1ck-op/586b2f682b2aed2039e9.js"></script>
 
 Article which saves my day:
 <ul>
