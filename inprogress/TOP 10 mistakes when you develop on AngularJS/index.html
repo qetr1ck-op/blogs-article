@@ -94,7 +94,8 @@ What is service:
 
 <ol>
     <li>It provides methods to keep, share and organize data across the lifetime of the Angular app</li>
-    <li>Lazy loads and singleton object</li>
+    <li>Lazy loads, Angular only creates instance of a service when an application component depends on it</li>
+    <li>Singleton object, application component dependent on the service work with the single instance</li>
 </ol>
 
 An Angular service can be created in five different ways:
@@ -115,7 +116,7 @@ Here is a great example by Misko:
     provide.value('a', 123);
     provide.constant('A', 321); //can't modify with a decorator
 
-    function Controller(a, A) {
+    function Controller(a, A) {0
         expect(a).toEqual(123);
         expect(A).toEqual(231);
     }
