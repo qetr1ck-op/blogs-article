@@ -132,6 +132,50 @@ As a side <code>note</code>, <code>service</code>, <code>factory</code>, and val
 
 <script src="https://gist.github.com/qetr1ck-op/586b2f682b2aed2039e9.js"></script>
 
+<a href name="TODO"></a>
+<div class="title-block">
+    6. Always dot in VM $scope's
+</div>
+
+In AngularJS every <code>$scope</code> prototypical inherits from its parent <code>$scope</code> till the highest level <code>$rootScope</code>.
+
+<script src="https://gist.github.com/qetr1ck-op/35a0dd1b8e16ff0bec4b.js"></script>
+
+When looking up <code>primitive</code>, the prototype chain is not consulted. If <code>navCtrl</code> is to be updated simultaneously then a prototype chain lookup is required; this will happen when the value is an <code>object</code>:
+
+<script src="https://gist.github.com/qetr1ck-op/763543e38942e2e38c1b.js"></script>
+
+<a href name="TODO"></a>
+<div class="title-block">
+    7. Unit testing AngularJS apps
+</div>
+
+JavaScript is a dynamically typed language which comes with great power of expression, but it also comes with almost no help from the compiler.
+For this reason we feel very strongly that any code written in JavaScript needs to come with a strong <a href="https://docs.angularjs.org/guide/unit-testing">set of tests</a>.
+
+<a href name="TODO"></a>
+<div class="title-block">
+    8. Not to do an end-to-end testing with Protractor
+</div>
+
+<a href="https://github.com/angular/protractor">Protractor</a> uses the <a href="http://jasmine.github.io/1.3/introduction.html">Jasmine</a> test framework for defining tests. Protractor has a very robust API for different page interactions.
+There are other end to end test tools, but Protractor has the advantage of understanding how to work with AngularJS code, especially when it comes to <code>$digest</code> cycles and more.
+
+<a href name="TODO"></a>
+<div class="title-block">
+    9. Full-Spectrum Testing with Karma
+</div>
+
+<a href="http://www.yearofmoo.com/2013/01/full-spectrum-testing-with-angularjs-and-karma.html">Awesome post</a> about testing AngularJS with <code>Karma</code>, passage form the post:
+
+Karma is an amazing testing tool which is designed to take all the frustration out of setting up a working test runner when testing JavaScript code.
+Karma works by spawning up each browser that is specified within its configuration file and then running JavaScript code against those browsers to see if they pass certain tests.
+Communication between Karma and each of the browsers is handled with the karma service running in the terminal using socket.io.
+Each time a test is run, Karma records its status and then tallies up which browsers have failed for each test and which ones passed and timed out.
+This makes each test work 100% natively in each browser without the need to test individually.
+Also, since the Karma service runs on a port and keeps track of browsers by itself, you can easily hook up other browsers and devices to it just by visiting its broadcasting port.
+Oh and did I mention that Karma is fast? Yeah it's really fast...
+
 Article which saves my day:
 <ul>
     <li>on <a href="https://www.airpair.com/angularjs/posts/top-10-mistakes-angularjs-developers-make">Original post</a></li>
