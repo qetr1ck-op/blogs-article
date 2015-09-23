@@ -1,20 +1,26 @@
 <div class="wp-center">
     <a href="TODO">
-        <img src="../source/images/TODO.png" alt="" width="TODOpx"/>
+        <img src="http://savemyday.in/source/images/TOP 10 mistakes when you develop on AngularJS/img.jpg" alt="" width="700px"/>
     </a>
 </div>
 
 <ul style="list-style: none;">
-    <li><a class="link-icon" href="/TODO/#TODO"></a>TODO</li>
-    <li><a class="link-icon" href="/TODO/#TODO"></a>TODO</li>
-    <li><a class="link-icon" href="/TODO/#TODO"></a>TODO</li>
-    <li><a class="link-icon" href="/TODO/#TODO"></a>TODO</li>
-    <li><a class="link-icon" href="/TODO/#TODO"></a>TODO</li>
+    <li><a class="link-icon" href="#1. MVC directory structure"></a>1. MVC directory structure</li>
+    <li><a class="link-icon" href="#2. Modules (or lack of them)"></a>2. Modules (or lack of them)</li>
+    <li><a class="link-icon" href="#3. Dependency Injection"></a>3. Dependency Injection</li>
+    <li><a class="link-icon" href="#3.1. Global Dependencies"></a>3.1. Global Dependencies</li>
+    <li><a class="link-icon" href="#4. Fat controllers"></a>4. Fat controllers</li>
+    <li><a class="link-icon" href="#5. Service vs Factory vs Provider"></a>5. Service vs Factory vs Provider</li>
+    <li><a class="link-icon" href="#6. Always dot in VM $scope's"></a>6. Always dot in VM $scope's</li>
+    <li><a class="link-icon" href="#7. Unit testing AngularJS apps"></a>7. Unit testing AngularJS apps</li>
+    <li><a class="link-icon" href="#8. Not to do an end-to-end testing with Protractor"></a>8. Not to do an end-to-end testing with Protractor</li>
+    <li><a class="link-icon" href="#9. Full-Spectrum Testing with Karma"></a>9. Full-Spectrum Testing with Karma</li>
+    <li><a class="link-icon" href="#10. Using jQuery"></a>10. Using jQuery</li>
 </ul>
 
 <!--more-->
 
-<a href name="TODO"></a>
+<a href="#1. MVC directory structure" name="1. MVC directory structure"></a>
 <div class="title-block">
     1. MVC directory structure
 </div>
@@ -25,13 +31,13 @@ When you work with MVC / MVW frameworks it's convenience to structure code by <c
 
 But when project will rise it's hard to use such structure of folders. You always need to open a few folder at the same time. It isn't depend what IDE or tool you use (Sublime, VS, Vim with NerdTree) - it's uncomfortable.
 
-To avoid this this developers often use grouping be <code>functionality type</code>:
+To avoid this this developers often use grouping by <code>functionality type</code>:
 
 <script src="https://gist.github.com/qetr1ck-op/9a0e5e9af7eed2f6aef3.js"></script>
 
 The structure allows more faster search for files which are related to the same feature. It may puzzled at the beginning to share js with html or even with test files. But it saves a lot of time, because it's more natural.
 
-<a href name="TODO"></a>
+<a href="#2. Modules (or lack of them)" name="2. Modules (or lack of them)"></a>
 <div class="title-block">
      2. Modules (or lack of them)
 </div>
@@ -48,7 +54,7 @@ For better scalability and future re-usability - split code by feature:
 
 <script src="https://gist.github.com/qetr1ck-op/2b390ced242af620f214.js"></script>
 
-<a href name="TODO"></a>
+<a href name="3. Dependency Injection"></a>
 <div class="title-block">
     3. Dependency Injection
 </div>
@@ -63,7 +69,7 @@ Now AngularJS can't resolve minificated variables. Easiest solution is:
 
 Another way to handle DI with minification is <a href="https://github.com/olov/ng-annotate">ng-annotate</a> module. More information on official <a href="https://docs.angularjs.org/tutorial/step_05#a-note-on-minification">AngularJS docs</a>
 
-<a href name="TODO"></a>
+<a href name="3.1. Global Dependencies"></a>
 <div class="title-block">
     3.1. Global Dependencies
 </div>
@@ -74,7 +80,7 @@ AngularJS makes it simple to encapsulate these globals into modules so they can 
 
 <script src="https://gist.github.com/qetr1ck-op/641f588b6820a1f3de81.js"></script>
 
-<a href name="TODO"></a>
+<a href name="4. Fat controllers"></a>
 <div class="title-block">
     4. Fat controllers
 </div>
@@ -85,7 +91,7 @@ App data should be also stored and fetched in services, except when we need boun
 
 AngularJS works best when following the Single Responsibility Principle (SRP). If the controller is a coordinator between the view and the model, then the amount of logic it has should be minimal. This will also make testing much simpler.
 
-<a href name="TODO"></a>
+<a href name="5. Service vs Factory vs Provider"></a>
 <div class="title-block">
     5. Service vs Factory vs Provider
 </div>
@@ -132,7 +138,7 @@ As a side <code>note</code>, <code>service</code>, <code>factory</code>, and val
 
 <script src="https://gist.github.com/qetr1ck-op/586b2f682b2aed2039e9.js"></script>
 
-<a href name="TODO"></a>
+<a href name="6. Always dot in VM $scope's"></a>
 <div class="title-block">
     6. Always dot in VM $scope's
 </div>
@@ -145,7 +151,7 @@ When looking up <code>primitive</code>, the prototype chain is not consulted. If
 
 <script src="https://gist.github.com/qetr1ck-op/763543e38942e2e38c1b.js"></script>
 
-<a href name="TODO"></a>
+<a href name="7. Unit testing AngularJS apps"></a>
 <div class="title-block">
     7. Unit testing AngularJS apps
 </div>
@@ -153,7 +159,7 @@ When looking up <code>primitive</code>, the prototype chain is not consulted. If
 JavaScript is a dynamically typed language which comes with great power of expression, but it also comes with almost no help from the compiler.
 For this reason we feel very strongly that any code written in JavaScript needs to come with a strong <a href="https://docs.angularjs.org/guide/unit-testing">set of tests</a>.
 
-<a href name="TODO"></a>
+<a href name="8. Not to do an end-to-end testing with Protractor"></a>
 <div class="title-block">
     8. Not to do an end-to-end testing with Protractor
 </div>
@@ -161,7 +167,7 @@ For this reason we feel very strongly that any code written in JavaScript needs 
 <a href="https://github.com/angular/protractor">Protractor</a> uses the <a href="http://jasmine.github.io/1.3/introduction.html">Jasmine</a> test framework for defining tests. Protractor has a very robust API for different page interactions.
 There are other end to end test tools, but Protractor has the advantage of understanding how to work with AngularJS code, especially when it comes to <code>$digest</code> cycles and more.
 
-<a href name="TODO"></a>
+<a href name="9. Full-Spectrum Testing with Karma"></a>
 <div class="title-block">
     9. Full-Spectrum Testing with Karma
 </div>
@@ -175,6 +181,19 @@ Each time a test is run, Karma records its status and then tallies up which brow
 This makes each test work 100% natively in each browser without the need to test individually.
 Also, since the Karma service runs on a port and keeps track of browsers by itself, you can easily hook up other browsers and devices to it just by visiting its broadcasting port.
 Oh and did I mention that Karma is fast? Yeah it's really fast...
+
+<a href name="10. Using jQuery"></a>
+<div class="title-block">
+    10. Using jQuery
+</div>
+
+AngularJS is a framework for building scalable apps. jQuery is a famous library for simplifying DOM manipulation, event handling, AJAX operation.
+
+AngularJS is about architecture of app, not augmenting HTML pages.
+
+Try to stop using jQuery and imperative paradigm, just let your code to extend HTML syntax in declarative style.
+
+DOM manipulation should only be done in directives, but this doesn't mean they have to be jQuery wrappers. Always consider what features AngularJS already provides before reaching for jQuery.
 
 Article which saves my day:
 <ul>
