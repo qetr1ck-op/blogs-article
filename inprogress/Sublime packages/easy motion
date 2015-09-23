@@ -1,0 +1,22 @@
+To transfer your Sublime Text configuration to fellow user you only need to copy
+
+Packages/User/Preferences.sublime-settings for settings
+Packages/User/Package Control.sublime-settings for list of plugins
+Other configuration files (shortcut keys, SFTP server configs, etc.) could be transferred, but they are not critical or may contain sensitive information
+It is not safe to copy plugins as is between environments, as plugins may contain operating system or computer specific dependencies. It’s better to copy Package Control.sublime-settings file only. On the next Sublime Text start up Package Control will automatically read the list of packages from this file and install any missing packages from Github.
+
+Manually installed packages, those not through Package Control, must be installed by hand on the target computer.
+
+easy motion
+Sidebar Enhancements
+emmet
+BracketHighlighter
+sublimelinter
+sublimelinter-contrib-eslint
+Sublime Alignment
+Doc​Blockr
+JsBeautifier
+ColorHighlighter
+JavaScript & NodeJS Snippets
+
+seti-iu
