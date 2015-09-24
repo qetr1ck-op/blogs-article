@@ -1,0 +1,456 @@
+The Prototype Inheritance, Prototype Property, Classes and Functional Inheritance
+
+
+<div class="wp-center">
+    <a href="TODO">
+        <img src="http://savemyday.in/source/images/TODO" alt="" width="TODOpx"/>
+    </a>
+</div>
+
+<ul style="list-style: none;">
+    <li><a class="link-icon" href="#TODO"></a>TODO</li>
+    <li><a class="link-icon" href="#TODO"></a>TODO</li>
+    <li><a class="link-icon" href="#TODO"></a>TODO</li>
+    <li><a class="link-icon" href="#TODO"></a>TODO</li>
+    <li><a class="link-icon" href="#TODO"></a>TODO</li>
+</ul>
+
+<!--more-->
+
+<a href="#TODO" name="TODO"></a>
+<div class="title-block">
+    Browser support and polyfill
+</div>
+
+<code>TODO</code>
+
+[javascript]
+
+[/javascript]
+
+Article which saves my day:
+<ul>
+    <li>on <a href="http://TODO">TODO</a></li>
+</ul>
+
+
+=================================
+
+The main poiny is that one object can be <code>prototype</code> of another object. That means if property isn't found in the object - than it takes from <code>prototype</code> object. In JavaScript this implementation is at the language level.
+
+<ul style="list-style: none;">
+    <li><a class="link-icon" href="#Inheritance through link __proto__"></a>Inheritance through link <code>__proto__</code></li>
+    <li><a class="link-icon" href="#Method hasOwnProperty"></a>Method <code>hasOwnProperty</code></li>
+    <li><a class="link-icon" href="#Prototype Chain"></a>Prototype Chain</li>
+    <li><a class="link-icon" href="#Object.create(proto)"></a><code>Object.create(proto)</code></li>
+    <li><a class="link-icon" href="#F.prototype"></a><code>F.prototype</code></li>
+    <li><a class="link-icon" href="#Object.getPrototypeOf(obj)"></a><code>Object.getPrototypeOf(obj)</code></li>
+    <li><a class="link-icon" href="#Classes. Where methods come from"></a>"Classes". Where methods come from <code>{ }</code></li>
+    <li><a class="link-icon" href="#Build-in Classes"></a>Build-in "Classes"</li>
+    <li><a class="link-icon" href="#Declares owns Classes"></a>Declares owns "Classes"</li>
+    <li><a class="link-icon" href="#Property constructor"></a>Property <code>constructor</code></li>
+    <li><a class="link-icon" href="#Inheritance for Classes"></a>Inheritance for "Classes".  Classical Inheritance</li>
+    <li><a class="link-icon" href="#Functional Inheritance"></a>Functional Inheritance</li>
+</ul>
+<hr>
+
+<!--more-->
+
+<a href="#Inheritance through link __proto__" name="Inheritance through link __proto__"></a>
+<div class="title-block">
+    <i class="attention"></i>Inheritance through link <code>__proto__</code>
+</div>
+
+Inheritance in JavaScript is realized via special property <code>__proto__</code> (In specs EcmaScript the name is <code>[[Prototype]]</code>). In ES5 the property was available in Chrome / Firefox and Safari, but in other browser was hidden. ES6 includes <code>__proto__</code> property as standard. In this article, for more efficient way I'll use <code>__proto__</code> property, but for legacy you should use <code>Object.getPrototypeOf()</code>
+
+If the object, for instance <code>rabbit</code>, has a special link <code>__proto__</code> to another object <code>animal</code>, that mean, that all property which are searched in the <code>rabbit</code>, will be also searched in the <code>animal</code> object.
+
+<script src="https://gist.github.com/qetr1ck-op/acf247f35d67290c8fbe.js"></script>
+
+We can write any object in <code>prototype</code> object:
+
+<script src="https://gist.github.com/qetr1ck-op/446b83701477ad23da58.js"></script>
+
+So, object pointed by <code>__proto__</code> it is his <code>prototype</code>. In another words <code>prototype</code> it's "Backup Storage of Properties and Methods", which automatically used in the search.
+
+<!-- TODO -->
+<div class="wp-center">
+    <img src="http://savemyday.in/source/images/TODO/img.png" alt=""/>
+</div>
+<br>
+
+<a href name="Method hasOwnProperty"></a>
+<div class="title-block">
+    <i class="attention"></i>Method hasOwnProperty</code>
+</div>
+
+Simple loop <code>for...in</code> or loop through iterable objects (Array, Mas, Set, arguments object) can't distinguish between the own properties and properties of his <code>prototype</code>
+
+<script src="https://gist.github.com/qetr1ck-op/bb4165bd8e74e36f3570.js"></script>
+
+For iterate only through own properties with <code>obj.hasOwnProperty(prop)</code>:
+
+<script src="https://gist.github.com/qetr1ck-op/f69804da0f8a16a29f79.js"></script>
+
+
+<a href name="Prototype Chain"></a>
+<div class="title-block">
+    <i class="attention"></i>Prototype Chain
+</div>
+
+In object <code>__proto__</code> can be another <code>__proto__</code> object and so on. For example, the inheritance chain of three object donkey -> winnie -> owl:
+
+[javascript]
+var owl = {
+    sayHello = function(str) {
+        return 'Hello ! ' + str
+    }
+}
+
+var winnie = {/* ... */};
+winnie.__proto__ = owl;
+
+var donkey = {/* ... */};
+donkey.__proto__ = owl;
+
+console.log(donkey.sayHello('prototype chain')) // Hello ! prototype chain
+[/javascript]
+
+<div class="wp-center">
+<img src="http://savemyday.in/source/images/prototype-chain.png" alt=""/>
+</div>
+<br>
+
+<a href name="Object.create(proto)"></a>
+<div class="title-block">
+    <i class="attention"></i>Object.create(proto)
+</div>
+
+As mention early, property <code>__proto__</code> doesn't available at all browsers. So generally, developers use <code>Object.create()</code> to create objects with prototype object.
+
+<code>Object.create(proto, objectDescriptor)</code> creates new empty object with <code>proto</code> object.
+
+[javascript]
+var animal = {eats: true};
+
+var rabbit = Object.create(animal);
+
+console.log(rabbit.eats) //true
+[/javascript]
+
+This method only allows create new empty object. He can't change <code>prototype</code> of an existing object.
+
+<a href name="F.prototype"></a>
+<div class="title-block">
+    <i class="attention"></i>F.prototype
+</div>
+
+Property <code>prototype</code> can point on any object but it has a sense, when it assigned to functions.
+
+When project is creating via <code>new</code>, in his <code>__proto__</code> object writes link from <code>prototype</code> of function-constructor.
+
+[javascript]
+function Animal(name) {
+    this.name = name;
+}
+
+var rabbit = {jump: true}
+
+Animal.prototype = rabbit;
+
+var animal = new Animal('Carl');
+
+console.log(animal.jump) // true, cause rabbit.__proto__ == rabbit
+[/javascript]
+
+<a href name="Object.getPrototypeOf(obj)"></a>
+<div class="title-block">
+    <i class="attention"></i>Object.getPrototypeOf(obj)
+</div>
+
+Calling <code>Object.getPrototypeOf(obj)</code> return prototype <code>obj</code>.
+
+[javascript]
+var animal = {
+    eats: true
+}
+
+var rabbit = Object.create(animal);
+
+console.log(Object.getPrototypeOf(rabbit) == animal) // true
+[/javascript]
+
+<a href name="Classes. Where methods come from { }"></a>
+<div class="title-block">
+    <i class="attention"></i>"Classes". Where methods come from empty {}
+</div>
+
+Lets begin with creating empty object end call method <code>toString</code>:
+
+[javascript]
+var obj = {};
+
+console.log(obj.toString()) // [object Object] ???
+[/javascript]
+
+It's obviously, that <code>{ }</code> is empty. But then who generate method <code>toString()</code>? Off-course this makes method <code>toString()</code> which is built-in <code>Object.prototype</code>.
+
+In details it works like this:
+
+<ol>
+    <li><code>obj = { }</code> means shorthand form for <code>obj = new Object()</code>, were <code>Object</code> is built-in function-constructor for objects</li>
+    <li>While <code>new Object</code> invokes, new object has receives <code>__proto__</code> aka <code>obj.__proto__</code> trough <code>prototype</code> constructor aka <code>Object.prototype</code>. In this case method <code>toString</code> works like <code>Object.prototype</code></li>
+    <li>In future when we call <code>obj.toString()</code> - method will be taking from prototype object.</li>
+</ol>
+
+<div class="wp-center">
+<img src="http://savemyday.in/source/images/classes-where-methods-come-from.png" alt=""/>
+</div>
+<br>
+
+It can be ease to check:
+
+[javascript]
+var obj = { };
+
+console.log(obj.__proto__ == Object.prototype) // true
+
+console.log(Object.getPrototypeOf(obj) == Object.prototype) // true
+
+console.log(obj.toString == Object.prototype.toString) // true
+[/javascript]
+
+<a href name="Build-in Classes"></a>
+<div class="title-block">
+    <i class="attention"></i>Build-in "Classes"
+</div>
+
+The same methods use in arrays <code>Array</code>, functions <code>Function</code> and other objects. Build-in methods are in <code>Array.prototype</code>, <code>Function.prototype</code>, etc.
+
+<div class="wp-center">
+<img src="http://savemyday.in/source/images/buildin-classes.png" alt=""/>
+</div>
+<br>
+
+Thats why everywhere JS developers like to say that "All objects inherit from <code>Object</code>". But it's a bull shit... All <code>prototypes</code> inherit from <code>Object.prototype</code>.
+
+In some cases, method can overrides. For example, "class" <code>Array</code> has it's own <code>toString</code>, which is in <code>Array.prototype.toString</code>:
+
+[javascript]
+var arr = [1, 2, 3];
+
+console.log(arr) // 1,2,3 ... result of arr.__proto__ -> Array.prototype.toString
+[/javascript]
+
+<a href name="Declares owns Classes"></a>
+<div class="title-block">
+    <i class="attention"></i>Declares own "Classes"
+</div>
+
+Classes called <code>function-constructor</code> (ordinary function, but with calling <code>new</code>) with her <code>prototype</code>.
+
+For create "Class" you need:
+
+<ol>
+    <li>Declare <code>function-constructor</code></li>
+    <li>Write all required methods and properties in <code>prototype</code></li>
+</ol>
+
+[javascript]
+function Animal(name) {
+    this.name = name;
+    this.distance = 0;
+}
+
+Animal.prototype.run = function(distance) {
+    this.distance += distance;
+    console.log(this.name + ' run for ' + this.distance);
+}
+
+Animal.prototype.jump = function() {
+    this.distance += 20;
+    console.log(this.name + ' jumps, total distance ' + this.distance);
+}
+
+Animal.prototype.clear = function() {
+    this.distance = 0;
+    console.log(this.name + ' finish his marathon');
+}
+
+var animal = new Animal('Jim');
+
+animal.run(20)  //Jim run for 20
+animal.jump();  //Jim jumps, total distance 40
+animal.jump();  //Jim jumps, total distance 60
+animal.clear(); //Jim finish his marathon
+
+[/javascript]
+
+<a href name="Property constructor"></a>
+<div class="title-block">
+    <i class="attention"></i>Property <code>constructor</code>
+</div>
+
+Property <code>constructor</code> is in every function, even if it isn't declare. So concept is next, the property <code>constructor</code> should have link to function, which creates the object:
+
+[javascript]
+function Animal() { };
+
+var animal = new Animal();
+
+console.log(animal.constructor == Animal) //true
+[/javascript]
+
+When we call <code>new Animal</code>, new object receives <code>animal.__proto__ = Animal.prototype</code> and property <code>constructor</code> become available from object, cause it's in <code>prototype</code> object.
+
+[javascript]
+function Animal() { };
+
+var animal = new Animal();
+
+/*
+engine creates
+Animal.prototype = {
+    constructor: Animal
+}
+*/
+
+console.log(animal.hasOwnProperty('constructor')) // false
+console.log(Animal.hasOwnProperty('constructor')) // true
+[/javascript]
+
+But when you overriding the <code>prototype</code>, property <code>constructor</code> disappears:
+
+[javascript]
+function Animal() { }
+
+Animal.prototype = {};  // override
+
+var animal = new Animal();
+
+console.log( animal.constructor == Animal ); // false
+console.log( animal.constructor == Object ); // true
+[/javascript]
+
+So how it works: animal -> Animal.prototype (new Object) -> Object.prototype
+
+<a href name="Inheritance for Classes"></a>
+<div class="title-block">
+    <i class="attention"></i>Inheritance for "Classes". Classical Inheritance</code>
+</div>
+
+Classes it isn't only function-constructor with <code>prototype</code>, it's also additional opportunities for OOP development.
+
+For example two "Classes" and realization of "Class inheritance":
+
+[javascript]
+//constructor Rectangle
+function Rectangle(length, width) {
+    this.length = length;
+    this.width = width;
+}
+
+Rectangle.prototype.getArea = function() {
+    return this.length * this.width;
+}
+
+Rectangle.prototype.toString = function() {
+    console.log('Rectangle ' + this.length + 'x' + this.width);
+}
+
+//constructor Square
+function Square(size) {
+    this.length = size;
+    this.width = size;
+}
+//===========
+//inheritance
+//===========
+Square.prototype = Object.create(Rectangle.prototype, {
+    constructor: {
+        value: Square,
+        configurable: true,
+        enurable: true,
+        writable: true
+    }
+})
+
+Square.prototype.toString = function() {
+    console.log('Square ' + this.length + 'x' + this.width);
+}
+
+var rect = new Rectangle(5, 10),
+    square = new Square(5);
+
+rect.toString();
+square.toString();
+
+console.log(rect instanceof Rectangle);
+console.log(rect instanceof Object);
+
+console.log(square instanceof Square);
+console.log(square instanceof Rectangle);
+console.log(square instanceof Object);
+[/javascript]
+
+<div class="wp-center">
+<img src="http://savemyday.in/source/images/inheritance-for-classes.png" alt=""/>
+</div>
+<br>
+
+<a href name="Functional Inheritance"></a>
+<div class="title-block">
+    <i class="attention"></i>Functional Inheritance</code>
+</div>
+
+Mechanism of creation <code>class</code> via Functionality Inheritance looks like:
+
+<ol>
+    <li>In parent class-constructor write methods and properties</li>
+    <li>Use <code>self</code> than <code>this</code></li>
+    <li>Private property begins with underline <code>_</code></li>
+</ol>
+
+[javascript]
+function Menu(options) {
+    var self = this;
+
+    this._elem = options.$elem; //private property
+
+    this.open = function() {
+        //use self (not this)
+    }
+}
+[/javascript]
+
+For inheritance creating a constructor-child:
+
+<ol>
+    <li>Invoke parent constructor in child scope</li>
+    <li>Add own methods, save and override parents methods</li>
+</ol>
+
+[javascript]
+function SlidingMenu(options) {
+    var self = this;
+
+    //inheritance
+    //invoke parent constructor in curent scope
+    Menu.apply(this, arguments);
+
+    //save parens open methods for future
+    var parentOpen = this.open;
+
+    //override open method
+    this.parent = function(arg) {
+        parentOpen(arg)
+
+        //... own functional
+    }
+}
+[/javascript]
+
+SaveMyDay:
+<ul>
+    <li>on <a href="http://learn.javascript.ru/"</a> learn.javascript.ru</li>
+</ul>
