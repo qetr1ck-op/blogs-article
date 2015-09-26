@@ -36,15 +36,16 @@ Article which saves my day:
 
 =================================
 
-The main poiny is that one object can be <code>prototype</code> of another object. That means if property isn't found in the object - than it takes from <code>prototype</code> object. In JavaScript this implementation is at the language level.
+The main point is that one object can be <code>prototype</code> of another object. That means if property isn't found in the object - than it takes from <code>prototype</code> object. In JavaScript this implementation is at the language level.
 
 <ul style="list-style: none;">
     <li><a class="link-icon" href="#Inheritance through link __proto__"></a>Inheritance through link <code>__proto__</code></li>
     <li><a class="link-icon" href="#Method hasOwnProperty"></a>Method <code>hasOwnProperty</code></li>
     <li><a class="link-icon" href="#Prototype Chain"></a>Prototype Chain</li>
-    <li><a class="link-icon" href="#Object.create(proto)"></a><code>Object.create(proto)</code></li>
-    <li><a class="link-icon" href="#F.prototype"></a><code>F.prototype</code></li>
-    <li><a class="link-icon" href="#Object.getPrototypeOf(obj)"></a><code>Object.getPrototypeOf(obj)</code></li>
+    <li><a class="link-icon" href="#Methods to work with __proto__"></a>Methods to work with <code>__proto__</code></li>
+    <li><a class="link-icon" href="#Exercise with __proto__"></a>Exercise with <code>__proto__</code></li>
+    <li><a class="link-icon" href="#F.prototype and creating object via new"></a>F.prototype<code>F.prototype</code> and creating object via <code>new</code></li>
+    <li><a class="link-icon" href="#Exercise with prototype and new"></a><code>Exercise with prototype and new</code></li>
     <li><a class="link-icon" href="#Classes. Where methods come from"></a>"Classes". Where methods come from <code>{ }</code></li>
     <li><a class="link-icon" href="#Build-in Classes"></a>Build-in "Classes"</li>
     <li><a class="link-icon" href="#Declares owns Classes"></a>Declares owns "Classes"</li>
@@ -73,9 +74,8 @@ We can write any object in <code>prototype</code> object:
 
 So, object pointed by <code>__proto__</code> it is his <code>prototype</code>. In another words <code>prototype</code> it's "Backup Storage of Properties and Methods", which automatically used in the search.
 
-<!-- TODO -->
 <div class="wp-center">
-    <img src="http://savemyday.in/source/images/TODO/img.png" alt=""/>
+    <img src="http://savemyday.in/source/images/TODO/img1.png" alt=""/>
 </div>
 <br>
 
@@ -92,7 +92,6 @@ For iterate only through own properties with <code>obj.hasOwnProperty(prop)</cod
 
 <script src="https://gist.github.com/qetr1ck-op/f69804da0f8a16a29f79.js"></script>
 
-
 <a href name="Prototype Chain"></a>
 <div class="title-block">
     <i class="attention"></i>Prototype Chain
@@ -100,85 +99,87 @@ For iterate only through own properties with <code>obj.hasOwnProperty(prop)</cod
 
 In object <code>__proto__</code> can be another <code>__proto__</code> object and so on. For example, the inheritance chain of three object donkey -> winnie -> owl:
 
-[javascript]
-var owl = {
-    sayHello = function(str) {
-        return 'Hello ! ' + str
-    }
-}
-
-var winnie = {/* ... */};
-winnie.__proto__ = owl;
-
-var donkey = {/* ... */};
-donkey.__proto__ = owl;
-
-console.log(donkey.sayHello('prototype chain')) // Hello ! prototype chain
-[/javascript]
+<script src="https://gist.github.com/qetr1ck-op/d57b779a057e164bf1d2.js"></script>
 
 <div class="wp-center">
-<img src="http://savemyday.in/source/images/prototype-chain.png" alt=""/>
+    <img src="http://savemyday.in/source/images/TODO/img2.png" alt=""/>
 </div>
 <br>
 
-<a href name="Object.create(proto)"></a>
+<a href name="Methods to work with __proto__"></a>
 <div class="title-block">
-    <i class="attention"></i>Object.create(proto)
+    <i class="attention"></i>Methods to work with __proto__
 </div>
 
-As mention early, property <code>__proto__</code> doesn't available at all browsers. So generally, developers use <code>Object.create()</code> to create objects with prototype object.
+By historical reason we have methods to get/set <code>__proto__</code>:
 
-<code>Object.create(proto, objectDescriptor)</code> creates new empty object with <code>proto</code> object.
+<script src="https://gist.github.com/qetr1ck-op/54c9dbea765318e4a2c2.js"></script>
 
-[javascript]
-var animal = {eats: true};
+<code>Object.create(proto, descriptors)</code> creates new empty object with <code>__proto__</code> object:
 
-var rabbit = Object.create(animal);
-
-console.log(rabbit.eats) //true
-[/javascript]
+<script src="https://gist.github.com/qetr1ck-op/970d7c61bf7452fd8b5e.js"></script>
 
 This method only allows create new empty object. He can't change <code>prototype</code> of an existing object.
+
+Create an empty collection, without prototype chain with <code>Object.create(null)</code>:
+
+<script src="https://gist.github.com/qetr1ck-op/99be3a7345429941c2eb.js"></script>
+
+<a href name="Exercise with __proto__"></a>
+<div class="title-block">
+    <i class="attention"></i>Exercise with <code>__proto__</code>
+</div>
+
+1.1
+<script src="https://gist.github.com/qetr1ck-op/d20e3a520e4dc06a5f63.js"></script>
+
+1.2
+<script src="https://gist.github.com/qetr1ck-op/32ce09bfa0ca65d5346d.js"></script>
+
+<div class="wp-center">
+    <img src="http://savemyday.in/source/images/TODO/img3.png" alt=""/>
+</div>
+<br>
 
 <a href name="F.prototype"></a>
 <div class="title-block">
     <i class="attention"></i>F.prototype
 </div>
 
-Property <code>prototype</code> can point on any object but it has a sense, when it assigned to functions.
+Property <code>prototype</code> can point on any object but it has sense, when it's assigned to function-constructor.
 
 When project is creating via <code>new</code>, in his <code>__proto__</code> object writes link from <code>prototype</code> of function-constructor.
 
-[javascript]
-function Animal(name) {
-    this.name = name;
-}
+<script src="https://gist.github.com/qetr1ck-op/c4ac921c558015b4a481.js"></script>
 
-var rabbit = {jump: true}
-
-Animal.prototype = rabbit;
-
-var animal = new Animal('Carl');
-
-console.log(animal.jump) // true, cause rabbit.__proto__ == rabbit
-[/javascript]
-
-<a href name="Object.getPrototypeOf(obj)"></a>
+<a href name="Exercise with prototype and new"></a>
 <div class="title-block">
-    <i class="attention"></i>Object.getPrototypeOf(obj)
+    <i class="attention"></i>Exercise with prototype and new
 </div>
 
-Calling <code>Object.getPrototypeOf(obj)</code> return prototype <code>obj</code>.
+1.1
 
-[javascript]
-var animal = {
-    eats: true
-}
+<script src="https://gist.github.com/qetr1ck-op/079e4c21baa262ca5f44.js"></script>
 
-var rabbit = Object.create(animal);
+1.2
 
-console.log(Object.getPrototypeOf(rabbit) == animal) // true
-[/javascript]
+<script src="https://gist.github.com/qetr1ck-op/340acc108182399dbd38.js"></script>
+
+1.3
+
+<script src="https://gist.github.com/qetr1ck-op/275f8d2485c73f3a365a.js"></script>
+
+1.4
+
+<script src="https://gist.github.com/qetr1ck-op/9b042fd1294bb8529477.js"></script>
+
+1.5
+
+<script src="https://gist.github.com/qetr1ck-op/36a799bfd94038ea3a88.js"></script>
+
+2.1
+
+<script src="https://gist.github.com/qetr1ck-op/aadce099bb5b8ddf7a02.js"></script>
 
 <a href name="Classes. Where methods come from { }"></a>
 <div class="title-block">
@@ -259,22 +260,7 @@ For create "Class" you need:
 [javascript]
 function Animal(name) {
     this.name = name;
-    this.distance = 0;
-}
-
-Animal.prototype.run = function(distance) {
-    this.distance += distance;
-    console.log(this.name + ' run for ' + this.distance);
-}
-
-Animal.prototype.jump = function() {
-    this.distance += 20;
-    console.log(this.name + ' jumps, total distance ' + this.distance);
-}
-
-Animal.prototype.clear = function() {
-    this.distance = 0;
-    console.log(this.name + ' finish his marathon');
+    this.distance =
 }
 
 var animal = new Animal('Jim');
