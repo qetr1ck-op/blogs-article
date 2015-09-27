@@ -43,9 +43,9 @@ The main point is that one object can be <code>prototype</code> of another objec
     <li><a class="link-icon" href="#Method hasOwnProperty"></a>Method <code>hasOwnProperty</code></li>
     <li><a class="link-icon" href="#Prototype Chain"></a>Prototype Chain</li>
     <li><a class="link-icon" href="#Methods to work with __proto__"></a>Methods to work with <code>__proto__</code></li>
-    <li><a class="link-icon" href="#Exercise with __proto__"></a>Exercise with <code>__proto__</code></li>
+    <li><a class="link-icon" href="#Exercises with __proto__"></a>Exercises with <code>__proto__</code></li>
     <li><a class="link-icon" href="#F.prototype and creating object via new"></a>F.prototype<code>F.prototype</code> and creating object via <code>new</code></li>
-    <li><a class="link-icon" href="#Exercise with prototype and new"></a><code>Exercise with prototype and new</code></li>
+    <li><a class="link-icon" href="#Exercises with prototype and new"></a><code>Exercises with prototype and new</code></li>
     <li><a class="link-icon" href="#Classes. Where methods come from"></a>"Classes". Where methods come from <code>{ }</code></li>
     <li><a class="link-icon" href="#Build-in Classes"></a>Build-in "Classes"</li>
     <li><a class="link-icon" href="#Declares owns Classes"></a>Declares owns "Classes"</li>
@@ -152,9 +152,9 @@ When project is creating via <code>new</code>, in his <code>__proto__</code> obj
 
 <script src="https://gist.github.com/qetr1ck-op/c4ac921c558015b4a481.js"></script>
 
-<a href name="Exercise with prototype and new"></a>
+<a href name="Exercises with prototype and new"></a>
 <div class="title-block">
-    <i class="attention"></i>Exercise with prototype and new
+    <i class="attention"></i>Exercises with prototype and new
 </div>
 
 1.1
@@ -188,38 +188,22 @@ When project is creating via <code>new</code>, in his <code>__proto__</code> obj
 
 Lets begin with creating empty object end call method <code>toString</code>:
 
-[javascript]
-var obj = {};
+<script src="https://gist.github.com/qetr1ck-op/d0902bca8a134b7c101f.js"></script>
 
-console.log(obj.toString()) // [object Object] ???
-[/javascript]
-
-It's obviously, that <code>{ }</code> is empty. But then who generate method <code>toString()</code>? Off-course this makes method <code>toString()</code> which is built-in <code>Object.prototype</code>.
+It's obviously, that <code>{ }</code> is empty. But then who generates method <code>toString()</code>? Off-course this makes method <code>toString()</code> which is built-in <code>Object.prototype</code>.
 
 In details it works like this:
 
 <ol>
-    <li><code>obj = { }</code> means shorthand form for <code>obj = new Object()</code>, were <code>Object</code> is built-in function-constructor for objects</li>
-    <li>While <code>new Object</code> invokes, new object has receives <code>__proto__</code> aka <code>obj.__proto__</code> trough <code>prototype</code> constructor aka <code>Object.prototype</code>. In this case method <code>toString</code> works like <code>Object.prototype</code></li>
-    <li>In future when we call <code>obj.toString()</code> - method will be taking from prototype object.</li>
+    <li>Creating object literal <code>obj = { }</code> means shorthand form for <code>obj = new Object()</code>, were <code>Object</code> is built-in function-constructor for objects</li>
+    <li>While <code>new Object</code> invokes, new object has receives <code>obj.__proto__ = Object.prototype</code>.</li>
+    <li><code>obj.toString === Object.prototype.toString</code> method will be taken from prototype object.</li>
 </ol>
 
 <div class="wp-center">
-<img src="http://savemyday.in/source/images/classes-where-methods-come-from.png" alt=""/>
+    <img src="http://savemyday.in/source/images/TODO/img4.png" alt=""/>
 </div>
 <br>
-
-It can be ease to check:
-
-[javascript]
-var obj = { };
-
-console.log(obj.__proto__ == Object.prototype) // true
-
-console.log(Object.getPrototypeOf(obj) == Object.prototype) // true
-
-console.log(obj.toString == Object.prototype.toString) // true
-[/javascript]
 
 <a href name="Build-in Classes"></a>
 <div class="title-block">
@@ -229,19 +213,15 @@ console.log(obj.toString == Object.prototype.toString) // true
 The same methods use in arrays <code>Array</code>, functions <code>Function</code> and other objects. Build-in methods are in <code>Array.prototype</code>, <code>Function.prototype</code>, etc.
 
 <div class="wp-center">
-<img src="http://savemyday.in/source/images/buildin-classes.png" alt=""/>
+<img src="http://savemyday.in/source/images/TODO/img5.png" alt=""/>
 </div>
 <br>
 
-Thats why everywhere JS developers like to say that "All objects inherit from <code>Object</code>". But it's a bull shit... All <code>prototypes</code> inherit from <code>Object.prototype</code>.
+Thats why everywhere JS developers like to say that "All objects inherit from <code>Object</code>". But it's a quite correct. All objects inherit from <code>Object.prototype</code> via <code>__proto__</code> link.
 
 In some cases, method can overrides. For example, "class" <code>Array</code> has it's own <code>toString</code>, which is in <code>Array.prototype.toString</code>:
 
-[javascript]
-var arr = [1, 2, 3];
-
-console.log(arr) // 1,2,3 ... result of arr.__proto__ -> Array.prototype.toString
-[/javascript]
+<script src="https://gist.github.com/qetr1ck-op/823a2dfdf760938c91fd.js"></script>
 
 <a href name="Declares owns Classes"></a>
 <div class="title-block">
