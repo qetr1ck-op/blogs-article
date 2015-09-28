@@ -266,44 +266,11 @@ For create "Class" you need:
 
 Property <code>constructor</code> is in every function, even if it isn't declare. So concept is next, the property <code>constructor</code> should have link to function, which creates the object:
 
-[javascript]
-function Animal() { };
-
-var animal = new Animal();
-
-console.log(animal.constructor == Animal) //true
-[/javascript]
-
-When we call <code>new Animal</code>, new object receives <code>animal.__proto__ = Animal.prototype</code> and property <code>constructor</code> become available from object, cause it's in <code>prototype</code> object.
-
-[javascript]
-function Animal() { };
-
-var animal = new Animal();
-
-/*
-engine creates
-Animal.prototype = {
-    constructor: Animal
-}
-*/
-
-console.log(animal.hasOwnProperty('constructor')) // false
-console.log(Animal.hasOwnProperty('constructor')) // true
-[/javascript]
+<script src="https://gist.github.com/qetr1ck-op/02ee2ee811e78b50274c.js"></script>
 
 But when you overriding the <code>prototype</code>, property <code>constructor</code> disappears:
 
-[javascript]
-function Animal() { }
-
-Animal.prototype = {};  // override
-
-var animal = new Animal();
-
-console.log( animal.constructor == Animal ); // false
-console.log( animal.constructor == Object ); // true
-[/javascript]
+<script src="https://gist.github.com/qetr1ck-op/c43b5a7d1ec3afd701af.js"></script>
 
 So how it works: animal -> Animal.prototype (new Object) -> Object.prototype
 
