@@ -276,62 +276,14 @@ So how it works: animal -> Animal.prototype (new Object) -> Object.prototype
 
 <a href name="Inheritance for Classes"></a>
 <div class="title-block">
-    <i class="attention"></i>Inheritance for "Classes". Classical Inheritance</code>
+    <i class="attention"></i>Prototype OOP</code>
 </div>
 
 Classes it isn't only function-constructor with <code>prototype</code>, it's also additional opportunities for OOP development.
 
 For example two "Classes" and realization of "Class inheritance":
 
-[javascript]
-//constructor Rectangle
-function Rectangle(length, width) {
-    this.length = length;
-    this.width = width;
-}
-
-Rectangle.prototype.getArea = function() {
-    return this.length * this.width;
-}
-
-Rectangle.prototype.toString = function() {
-    console.log('Rectangle ' + this.length + 'x' + this.width);
-}
-
-//constructor Square
-function Square(size) {
-    this.length = size;
-    this.width = size;
-}
-//===========
-//inheritance
-//===========
-Square.prototype = Object.create(Rectangle.prototype, {
-    constructor: {
-        value: Square,
-        configurable: true,
-        enurable: true,
-        writable: true
-    }
-})
-
-Square.prototype.toString = function() {
-    console.log('Square ' + this.length + 'x' + this.width);
-}
-
-var rect = new Rectangle(5, 10),
-    square = new Square(5);
-
-rect.toString();
-square.toString();
-
-console.log(rect instanceof Rectangle);
-console.log(rect instanceof Object);
-
-console.log(square instanceof Square);
-console.log(square instanceof Rectangle);
-console.log(square instanceof Object);
-[/javascript]
+<script src="https://gist.github.com/qetr1ck-op/4aed9017910b8e0d2c39.js"></script>
 
 <div class="wp-center">
 <img src="http://savemyday.in/source/images/inheritance-for-classes.png" alt=""/>
