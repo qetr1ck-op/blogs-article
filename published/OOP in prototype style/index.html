@@ -1,58 +1,19 @@
-The Prototype Inheritance, Prototype Property, Classes and Functional Inheritance
-
-
-<div class="wp-center">
-    <a href="TODO">
-        <img src="http://savemyday.in/source/images/TODO" alt="" width="TODOpx"/>
-    </a>
-</div>
-
-<ul style="list-style: none;">
-    <li><a class="link-icon" href="#TODO"></a>TODO</li>
-    <li><a class="link-icon" href="#TODO"></a>TODO</li>
-    <li><a class="link-icon" href="#TODO"></a>TODO</li>
-    <li><a class="link-icon" href="#TODO"></a>TODO</li>
-    <li><a class="link-icon" href="#TODO"></a>TODO</li>
-</ul>
-
-<!--more-->
-
-<a href="#TODO" name="TODO"></a>
-<div class="title-block">
-    Browser support and polyfill
-</div>
-
-<code>TODO</code>
-
-[javascript]
-
-[/javascript]
-
-Article which saves my day:
-<ul>
-    <li>on <a href="http://TODO">TODO</a></li>
-</ul>
-
-
-=================================
-
 The main point is that one object can be <code>prototype</code> of another object. That means if property isn't found in the object - than it takes from <code>prototype</code> object. In JavaScript this implementation is at the language level.
 
 <ul style="list-style: none;">
-    <li><a class="link-icon" href="#Inheritance through link __proto__"></a>Inheritance through link <code>__proto__</code></li>
-    <li><a class="link-icon" href="#Method hasOwnProperty"></a>Method <code>hasOwnProperty</code></li>
-    <li><a class="link-icon" href="#Prototype Chain"></a>Prototype Chain</li>
-    <li><a class="link-icon" href="#Methods to work with __proto__"></a>Methods to work with <code>__proto__</code></li>
-    <li><a class="link-icon" href="#Exercises with __proto__"></a>Exercises with <code>__proto__</code></li>
-    <li><a class="link-icon" href="#F.prototype and creating object via new"></a>F.prototype<code>F.prototype</code> and creating object via <code>new</code></li>
-    <li><a class="link-icon" href="#Exercises with prototype and new"></a><code>Exercises with prototype and new</code></li>
-    <li><a class="link-icon" href="#Classes. Where methods come from"></a>"Classes". Where methods come from <code>{ }</code></li>
-    <li><a class="link-icon" href="#Build-in Classes"></a>Build-in "Classes"</li>
-    <li><a class="link-icon" href="#Exercises with overriding prototype"></a>Exercises with overriding prototype</li>
-    <li><a class="link-icon" href="#Declares owns Classes"></a>Declares owns "Classes"</li>
-    <li><a class="link-icon" href="#Property constructor"></a>Property <code>constructor</code></li>
-    <li><a class="link-icon" href="#Inheritance for Classes"></a>Inheritance for "Classes".  Classical Inheritance</li>
-    <li><a class="link-icon" href="#Functional Inheritance"></a>Functional Inheritance</li>
+    <li><a class="link-icon" href=" http://savemyday.in/oop-in-prototype-style/#Inheritance through link __proto__"></a>Inheritance through link <code>__proto__</code></li>
+    <li><a class="link-icon" href=" http://savemyday.in/oop-in-prototype-style/#Method hasOwnProperty"></a>Method <code>hasOwnProperty</code></li>
+    <li><a class="link-icon" href=" http://savemyday.in/oop-in-prototype-style/#Prototype Chain"></a>Prototype Chain</li>
+    <li><a class="link-icon" href=" http://savemyday.in/oop-in-prototype-style/#Methods to work with __proto__"></a>Methods to work with <code>__proto__</code></li>
+    <li><a class="link-icon" href=" http://savemyday.in/oop-in-prototype-style/#Exercises with __proto__"></a>Exercises with <code>__proto__</code></li>
+    <li><a class="link-icon" href=" http://savemyday.in/oop-in-prototype-style/#F.prototype and creating object via new"></a>F.prototype<code>F.prototype</code> and creating object via <code>new</code></li>
+    <li><a class="link-icon" href=" http://savemyday.in/oop-in-prototype-style/#Exercises with prototype and new"></a>Exercises with prototype and new</li>
+    <li><a class="link-icon" href=" http://savemyday.in/oop-in-prototype-style/#Classes. Where methods come from"></a>"Classes". Where methods come from <code>{ }</code></li>
+    <li><a class="link-icon" href=" http://savemyday.in/oop-in-prototype-style/#Build-in Classes"></a>Build-in "Classes"</li>
+    <li><a class="link-icon" href=" http://savemyday.in/oop-in-prototype-style/#Exercises with overriding prototype"></a>Exercises with overriding prototype</li>
+    <li><a class="link-icon" href=" http://savemyday.in/oop-in-prototype-style/#Declares owns Classes"></a>Declares owns "Classes"</li>
+    <li><a class="link-icon" href=" http://savemyday.in/oop-in-prototype-style/#Property constructor"></a>Property <code>constructor</code></li>
+    <li><a class="link-icon" href=" http://savemyday.in/oop-in-prototype-style/#Inheritance for Classes"></a>Inheritance for "Classes".  Classical Inheritance</li>
 </ul>
 <hr>
 
@@ -76,11 +37,13 @@ We can write any object in <code>prototype</code> object:
 So, object pointed by <code>__proto__</code> it is his <code>prototype</code>. In another words <code>prototype</code> it's "Backup Storage of Properties and Methods", which automatically used in the search.
 
 <div class="wp-center">
-    <img src="http://savemyday.in/source/images/TODO/img1.png" alt=""/>
+    <img src="http://savemyday.in/source/images/OOP in prototype style/img1.png" alt=""/>
 </div>
 <br>
 
-<a href name="Method hasOwnProperty"></a>
+<!--  -->
+
+<a href="#Method hasOwnProperty" name="Method hasOwnProperty"></a>
 <div class="title-block">
     <i class="attention"></i>Method hasOwnProperty</code>
 </div>
@@ -93,7 +56,9 @@ For iterate only through own properties with <code>obj.hasOwnProperty(prop)</cod
 
 <script src="https://gist.github.com/qetr1ck-op/f69804da0f8a16a29f79.js"></script>
 
-<a href name="Prototype Chain"></a>
+<!--  -->
+
+<a href="#Prototype Chain" name="Prototype Chain"></a>
 <div class="title-block">
     <i class="attention"></i>Prototype Chain
 </div>
@@ -103,16 +68,18 @@ In object <code>__proto__</code> can be another <code>__proto__</code> object an
 <script src="https://gist.github.com/qetr1ck-op/d57b779a057e164bf1d2.js"></script>
 
 <div class="wp-center">
-    <img src="http://savemyday.in/source/images/TODO/img2.png" alt=""/>
+    <img src="http://savemyday.in/source/images/OOP in prototype style/img2.png" alt=""/>
 </div>
 <br>
 
-<a href name="Methods to work with __proto__"></a>
+<!--  -->
+
+<a href="#Methods to work with __proto__" name="Methods to work with __proto__"></a>
 <div class="title-block">
     <i class="attention"></i>Methods to work with __proto__
 </div>
 
-By historical reason we have methods to get/set <code>__proto__</code>:
+By historical reason we have methods to get/set <code>__proto__</code> property:
 
 <script src="https://gist.github.com/qetr1ck-op/54c9dbea765318e4a2c2.js"></script>
 
@@ -126,7 +93,9 @@ Create an empty collection, without prototype chain with <code>Object.create(nul
 
 <script src="https://gist.github.com/qetr1ck-op/99be3a7345429941c2eb.js"></script>
 
-<a href name="Exercise with __proto__"></a>
+<!--  -->
+
+<a href="#Exercise with __proto__" name="Exercise with __proto__"></a>
 <div class="title-block">
     <i class="attention"></i>Exercise with <code>__proto__</code>
 </div>
@@ -138,11 +107,13 @@ Create an empty collection, without prototype chain with <code>Object.create(nul
 <script src="https://gist.github.com/qetr1ck-op/32ce09bfa0ca65d5346d.js"></script>
 
 <div class="wp-center">
-    <img src="http://savemyday.in/source/images/TODO/img3.png" alt=""/>
+    <img src="http://savemyday.in/source/images/OOP in prototype style/img3.png" alt=""/>
 </div>
 <br>
 
-<a href name="F.prototype"></a>
+<!--  -->
+
+<a href="#F.prototype" name="F.prototype"></a>
 <div class="title-block">
     <i class="attention"></i>F.prototype
 </div>
@@ -153,7 +124,9 @@ When project is creating via <code>new</code>, in his <code>__proto__</code> obj
 
 <script src="https://gist.github.com/qetr1ck-op/c4ac921c558015b4a481.js"></script>
 
-<a href name="Exercises with prototype and new"></a>
+<!--  -->
+
+<a href="#Exercises with prototype and new" name="Exercises with prototype and new"></a>
 <div class="title-block">
     <i class="attention"></i>Exercises with prototype and new
 </div>
@@ -182,7 +155,9 @@ When project is creating via <code>new</code>, in his <code>__proto__</code> obj
 
 <script src="https://gist.github.com/qetr1ck-op/aadce099bb5b8ddf7a02.js"></script>
 
-<a href name="Classes. Where methods come from { }"></a>
+<!--  -->
+
+<a href="#Classes. Where methods come from { }" name="Classes. Where methods come from { }"></a>
 <div class="title-block">
     <i class="attention"></i>"Classes". Where methods come from empty {}
 </div>
@@ -202,19 +177,23 @@ In details it works like this:
 </ol>
 
 <div class="wp-center">
-    <img src="http://savemyday.in/source/images/TODO/img4.png" alt=""/>
+    <img src="http://savemyday.in/source/images/OOP in prototype style/img4.png" alt=""/>
 </div>
 <br>
 
-<a href name="Build-in Classes"></a>
+<!--  -->
+
+<a href="#Build-in Classes" name="Build-in Classes"></a>
 <div class="title-block">
     <i class="attention"></i>Build-in "Classes"
 </div>
 
 The same methods use in arrays <code>Array</code>, functions <code>Function</code> and other objects. Build-in methods are in <code>Array.prototype</code>, <code>Function.prototype</code>, etc.
 
+<!--  -->
+
 <div class="wp-center">
-<img src="http://savemyday.in/source/images/TODO/img5.png" alt=""/>
+    <img src="http://savemyday.in/source/images/OOP in prototype style/img5.png" alt=""/>
 </div>
 <br>
 
@@ -224,7 +203,9 @@ In some cases, method can overrides. For example, "class" <code>Array</code> has
 
 <script src="https://gist.github.com/qetr1ck-op/823a2dfdf760938c91fd.js"></script>
 
-<a href name="Exercises with overriding prototype"></a>
+<!--  -->
+
+<a href="#Exercises with overriding prototype" name="Exercises with overriding prototype"></a>
 <div class="title-block">
     <i class="attention"></i>Exercises with overriding prototype
 </div>
@@ -245,7 +226,9 @@ In some cases, method can overrides. For example, "class" <code>Array</code> has
 
 <script src="https://gist.github.com/qetr1ck-op/a292315fd0ddd6477827.js"></script>
 
-<a href name="Declares own Classes"></a>
+<!--  -->
+
+<a href="#Declares own Classes" name="Declares own Classes"></a>
 <div class="title-block">
     <i class="attention"></i>Declares own "Classes"
 </div>
@@ -259,7 +242,9 @@ For create "Class" you need:
 
 <script src="https://gist.github.com/qetr1ck-op/fde34608e4532f82d166.js"></script>
 
-<a href name="Property constructor"></a>
+<!--  -->
+
+<a href="#Property constructor" name="Property constructor"></a>
 <div class="title-block">
     <i class="attention"></i>Property <code>constructor</code>
 </div>
@@ -274,7 +259,9 @@ But when you overriding the <code>prototype</code>, property <code>constructor</
 
 So how it works: animal -> Animal.prototype (new Object) -> Object.prototype
 
-<a href name="Inheritance for Classes"></a>
+<!--  -->
+
+<a href="#Inheritance for Classes" name="Inheritance for Classes"></a>
 <div class="title-block">
     <i class="attention"></i>Prototype OOP</code>
 </div>
@@ -285,64 +272,7 @@ For example two "Classes" and realization of "Class inheritance":
 
 <script src="https://gist.github.com/qetr1ck-op/4aed9017910b8e0d2c39.js"></script>
 
-<div class="wp-center">
-<img src="http://savemyday.in/source/images/inheritance-for-classes.png" alt=""/>
-</div>
-<br>
-
-<a href name="Functional Inheritance"></a>
-<div class="title-block">
-    <i class="attention"></i>Functional Inheritance</code>
-</div>
-
-Mechanism of creation <code>class</code> via Functionality Inheritance looks like:
-
-<ol>
-    <li>In parent class-constructor write methods and properties</li>
-    <li>Use <code>self</code> than <code>this</code></li>
-    <li>Private property begins with underline <code>_</code></li>
-</ol>
-
-[javascript]
-function Menu(options) {
-    var self = this;
-
-    this._elem = options.$elem; //private property
-
-    this.open = function() {
-        //use self (not this)
-    }
-}
-[/javascript]
-
-For inheritance creating a constructor-child:
-
-<ol>
-    <li>Invoke parent constructor in child scope</li>
-    <li>Add own methods, save and override parents methods</li>
-</ol>
-
-[javascript]
-function SlidingMenu(options) {
-    var self = this;
-
-    //inheritance
-    //invoke parent constructor in curent scope
-    Menu.apply(this, arguments);
-
-    //save parens open methods for future
-    var parentOpen = this.open;
-
-    //override open method
-    this.parent = function(arg) {
-        parentOpen(arg)
-
-        //... own functional
-    }
-}
-[/javascript]
-
 SaveMyDay:
 <ul>
-    <li>on <a href="http://learn.javascript.ru/"</a> learn.javascript.ru</li>
+    <li>on <a href="https://learn.javascript.ru/prototypes"</a> learn.javascript.ru</li>
 </ul>
