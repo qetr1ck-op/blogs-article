@@ -1,9 +1,18 @@
-<mxfile host="app.diagrams.net" modified="2022-06-15T09:48:03.585Z" agent="5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/101.0.4951.67 Safari/537.36" etag="ctYe1iT-qPbTUHSARTcc" version="17.4.6" type="github">
+<mxfile host="app.diagrams.net" modified="2022-06-15T09:49:31.573Z" agent="5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/101.0.4951.67 Safari/537.36" etag="-pYCS5d-XOyBGyQA_7r4" version="17.4.6" type="github">
   <diagram id="vL2vsRPLsXMtJ4D0PWGO" name="Page-1">
     <mxGraphModel dx="1726" dy="741" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="827" pageHeight="1169" math="0" shadow="0">
       <root>
         <mxCell id="0" />
         <mxCell id="1" parent="0" />
+        <mxCell id="Uu8EQ_SUklJkSBML0iLL-3" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" edge="1" parent="1" source="Uu8EQ_SUklJkSBML0iLL-1" target="Uu8EQ_SUklJkSBML0iLL-2">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="Uu8EQ_SUklJkSBML0iLL-1" value="not sign-ined" style="rounded=1;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="350" y="350" width="120" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="Uu8EQ_SUklJkSBML0iLL-2" value="sign-in and redirect to cancel" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#fff2cc;strokeColor=#d6b656;" vertex="1" parent="1">
+          <mxGeometry x="150" y="350" width="120" height="60" as="geometry" />
+        </mxCell>
       </root>
     </mxGraphModel>
   </diagram>
